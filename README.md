@@ -17,6 +17,7 @@ Kein reines "PS hochdrehen"-Manager-Spiel: Ziel ist es, dass technisch versierte
 - **Realistische Abhängigkeiten**: jedes Bauteil wirkt sich auf andere Bauteile und auf die Fahrleistung aus
 - **Reglement als Spielmechanik**: Saisonvorgaben, Prüfstation, Bestechungsoption
 - **Historische Saisons**: konkrete vergangene Saisons mit den damals gefahrenen Strecken wählbar
+- **Zwei stilistisch konsistente Grafikwelten**: 2D-Pixelart für Rennen, Low-Poly-3D für die Werkstatt
 
 ---
 
@@ -67,8 +68,10 @@ Alles ist gegenseitig abhängig: z. B. beeinflusst der Motor die passende Kühle
 
 ### Grafik & Präsentation
 
-- Pixelart-Grafik
-- Live-Rennsimulation aus der Top-Down-Ansicht (Vogelperspektive auf die Strecke)
+- **Rennansicht**: 2D-Pixelart, Live-Simulation aus der Top-Down-Ansicht (Vorbild: F1 Clash)
+- **Werkstatt/Boxengasse**: Low-Poly-3D mit freier Kamera – das Auto ist von allen Seiten betrachtbar (Vorbild fürs Prinzip: Forza-Horizon-Garage), im bewusst reduzierten, stilisierten Look statt Fotorealismus (Stil-Vorbild: Art of Rally)
+- Eingebaute Bauteile sind direkt am Fahrzeug sichtbar (z. B. ein montierter Turbo erscheint im Motorraum-Modell) über ein modulares Bauteil-Socket-System
+- Bauteile sind erkennbar, aber bewusst nicht fotorealistisch nachgebildet
 - Plattform: Desktop (Windows, Mac)
 
 ---
@@ -88,7 +91,7 @@ Details, konkrete Werte und das Formelmodell: siehe [`docs/GDD.md`](docs/GDD.md)
 
 ## Tech Stack
 
-- **Engine**: Godot 4 (GDScript)
+- **Engine**: Godot 4 (GDScript) – vereint 2D (Rennansicht) und 3D (Werkstatt) nativ in einer Engine
 - **Plattform**: Windows, Mac (Desktop-Export)
 - **Entwicklung**: unterstützt durch Claude Code
 
@@ -102,7 +105,7 @@ Details, konkrete Werte und das Formelmodell: siehe [`docs/GDD.md`](docs/GDD.md)
 4. Prototyp-Rennen (ein Auto, eine Strecke, Rundenzeit)
 5. KI-Gegner
 6. Karriere-/Team-Ebene (Kalender, Budget, Werkstatt-UI)
-7. Pixelart-Grafik
+7. Grafik-Umsetzung: Pixelart-Rennansicht + Low-Poly-3D-Werkstatt mit Bauteil-Socket-System
 8. Historische Inhalte (weitere Saisons, Strecken, Klassen)
 9. Feinschliff, Balancing, Distribution
 
@@ -121,11 +124,17 @@ motorsport-manager/
 │   ├── regulations/
 │   └── tracks/
 ├── scripts/
-│   ├── core/
-│   ├── ui/
-│   └── race/
+│   ├── core/           # Bauteil-/Statberechnung, Regel-Validator
+│   ├── ui/              # HUD, Menüs
+│   ├── race/             # Renn-Simulation, KI (2D)
+│   └── garage/            # Freie Kamera, Bauteil-Socket-System (3D)
 ├── scenes/
+│   ├── race/               # 2D-Pixelart-Szenen
+│   └── garage/               # Low-Poly-3D-Szenen
 └── assets/
+    ├── sprites/               # Pixelart für die Rennansicht
+    ├── models/parts/           # Low-Poly-Meshes je Bauteil
+    └── textures/
 ```
 
 ---

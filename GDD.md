@@ -1,16 +1,16 @@
 # Game Design Document – Motorsport Manager (Arbeitstitel)
 
-**Version:** 0.1 (Demo-Scope)
+**Version:** 0.2 (Demo-Scope + Grafik-Konzept)
 **Stand:** August 2026
 **Demo-Klasse:** DTM (Deutsche Tourenwagen Masters) – fiktive Saison "DTM Demo 2026"
 
-> Hinweis: Alle Hersteller-/Markennamen sind fiktiv, um spätere Lizenzprobleme zu vermeiden. Reale Vorbilder (Motorenbauart, Kennzahlen) dienen nur als Realismus-Referenz.
+> Hinweis: Alle Hersteller-/Markennamen sind fiktiv, um spätere Lizenzprobleme zu vermeiden. Reale Vorbilder (Motorenbauart, Kennzahlen, Spielreferenzen für den Grafikstil) dienen nur als Realismus-/Stil-Referenz.
 
 ---
 
 ## 1. Vision
 
-Ein Motorsport-Manager-Spiel, bei dem der Spieler ein Team führt, Fahrzeuge aus einzelnen Bauteilen zusammenbaut, gegen ein Regelwerk antritt (inkl. Grauzonen/Bestechung) und Rennen als Live-Top-Down-Simulation erlebt. Pixelart-Grafik, Desktop (Windows/Mac).
+Ein Motorsport-Manager-Spiel, bei dem der Spieler ein Team führt, Fahrzeuge aus einzelnen Bauteilen zusammenbaut, gegen ein Regelwerk antritt (inkl. Grauzonen/Bestechung) und Rennen als Live-Top-Down-Simulation erlebt. Zwei stilistisch konsistente Grafikwelten: Pixelart für Rennen, Low-Poly-3D für die Werkstatt. Desktop (Windows/Mac).
 
 ---
 
@@ -22,12 +22,38 @@ Ein Motorsport-Manager-Spiel, bei dem der Spieler ein Team führt, Fahrzeuge aus
 - Bauteil-Pools: 5 Motoren, 4 Getriebe, 4 Fahrwerke, 5 Reifen, 3 Bremsanlagen, 4 Aero-Teile (3 Heckspoiler + 1 Heckdiffusor)
 - 9 Setup-Parameter, live einstellbar
 - Prüfstation + Bestechungs-Mechanik als Kernfeature
+- Grafik-Konzept (siehe Abschnitt 3): 2D-Pixelart-Rennansicht + Low-Poly-3D-Werkstatt
 
 ---
 
-## 3. Bauteile
+## 3. Grafik & Perspektive
 
-### 3.1 Motoren (5)
+Zwei unterschiedliche, aber stilistisch konsistente Darstellungsarten je nach Spielmodus.
+
+### 3.1 Rennansicht
+
+- 2D-Pixelart
+- Top-Down-Perspektive (Vogelperspektive auf die Strecke), Stil-Vorbild: F1 Clash
+- Live-Simulation in Echtzeit, keine reine Rundenzeiten-Berechnung
+
+### 3.2 Werkstatt / Boxengasse
+
+- Low-Poly-3D, bewusst kein Fotorealismus – Stil-Vorbild: Art of Rally (reduzierte Formen, flache Farben statt aufwändiger PBR-Texturen)
+- Freie Kamera, Auto von allen Seiten betrachtbar – Vorbild fürs Prinzip: Forza-Horizon-Garage
+- Eingebaute Bauteile sind am Fahrzeug sichtbar (z. B. ein montierter Turbo erscheint im Motorraum-Modell) – Vorbild fürs Prinzip: Night-Runners, aber in Low-Poly statt Fotorealismus umgesetzt
+- Bauteile müssen erkennbar, aber nicht fotorealistisch nachgebildet sein (z. B. eine Zündkerze ist an Form/Farbe erkennbar, ohne jedes Detail nachzubilden)
+
+### 3.3 Technisches Konzept: Bauteil-Sockets
+
+- Das Basis-Chassis jeder Fahrzeugklasse besitzt feste Attachment-Points (Sockets) pro Bauteilkategorie: Motorraum, Bremssättel je Rad, Ansaugöffnung, Heckbereich für Aero usw.
+- Jedes Bauteil ist ein eigenes kleines Low-Poly-Mesh, das beim Wechsel im Menü am zugehörigen Socket ein-/ausgehängt wird
+- Diese Architektur ist unabhängig vom Grafikstil – sie funktioniert auch, falls einzelne Assets später aufgewertet werden sollen
+
+---
+
+## 4. Bauteile
+
+### 4.1 Motoren (5)
 
 | ID | Name | Bauart | PS | Max. Drehmoment (Nm) | Gewicht (kg) | Zuverlässigkeit (1–10) | Preis (€) | Besonderheit |
 |----|------|--------|----|----|----|----|----|----|
@@ -42,7 +68,7 @@ Ein Motorsport-Manager-Spiel, bei dem der Spieler ein Team führt, Fahrzeuge aus
 - *Turbo:* Leistungseinbruch unter ca. 4.000 U/min ("Lag"), dafür höchste Peak-Leistung pro kg
 - *Kompressor:* keine Verzögerung, aber konstanter Leistungsverlust durch mechanischen Antrieb (~Verbrauchsmalus)
 
-### 3.2 Getriebe (4)
+### 4.2 Getriebe (4)
 
 | ID | Name | Gänge | Schaltzeit (ms) | Gewicht (kg) | Zuverlässigkeit | Preis (€) |
 |----|------|----|----|----|----|----|
@@ -51,9 +77,9 @@ Ein Motorsport-Manager-Spiel, bei dem der Spieler ein Team führt, Fahrzeuge aus
 | G3 | Race-Sequential | 7 | 35 | 40 | 6 | 110.000 |
 | G4 | Verstärktes Standardgetriebe | 6 | 90 | 50 | 10 | 35.000 |
 
-### 3.3 Fahrwerke – Hardware (4)
+### 4.3 Fahrwerke – Hardware (4)
 
-Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht die Einstellung selbst.
+Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 5), nicht die Einstellung selbst.
 
 | ID | Name | Gewicht (kg) | Preis (€) | Verstellbereich | Besonderheit |
 |----|------|----|----|----|----|
@@ -62,7 +88,7 @@ Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht di
 | C3 | Renn-Fahrwerk Pro | 45 | 150.000 | maximal | Empfindlich – Fehleinstellung wirkt stärker |
 | C4 | Leichtbau-Fahrwerk | 38 | 130.000 | erweitert | Schnellerer Verschleiß bei Kerbs |
 
-### 3.4 Reifen (5)
+### 4.4 Reifen (5)
 
 | ID | Name | Grip trocken | Grip nass | Verschleißfaktor | Optimales Temperaturfenster |
 |----|------|----|----|----|----|
@@ -72,7 +98,7 @@ Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht di
 | T4 | Regen | 3/10 | 9/10 | 1.2 | schmal (kalt) |
 | T5 | Intermediate | 5/10 | 7/10 | 1.1 | mittel |
 
-### 3.5 Bremsanlagen (3)
+### 4.5 Bremsanlagen (3)
 
 | ID | Name | Bremsleistung | Gewicht (kg) | Preis (€) | Besonderheit |
 |----|------|----|----|----|----|
@@ -80,7 +106,7 @@ Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht di
 | B2 | Verbund Sport | 8.5/10 | 16 | 55.000 | Gute Balance |
 | B3 | Carbon-Keramik Race | 10/10 | 11 | 120.000 | Braucht Mindesttemperatur, sonst Leistungseinbruch |
 
-### 3.6 Aero (4: 3 Heckspoiler + 1 Heckdiffusor)
+### 4.6 Aero (4: 3 Heckspoiler + 1 Heckdiffusor)
 
 | ID | Name | Abtrieb | Luftwiderstand | Preis (€) |
 |----|------|----|----|----|
@@ -91,7 +117,7 @@ Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht di
 
 ---
 
-## 4. Setup-Parameter (live einstellbar am fertigen Auto)
+## 5. Setup-Parameter (live einstellbar am fertigen Auto)
 
 | Parameter | Bereich | Wirkung |
 |---|---|---|
@@ -107,7 +133,7 @@ Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 4), nicht di
 
 ---
 
-## 5. Formelmodell (Demo-Version, vereinfacht)
+## 6. Formelmodell (Demo-Version, vereinfacht)
 
 Ziel: kein echtes Physik-Modell, sondern ein gewichtetes Kennlinien-System, das sich real anfühlt.
 
@@ -131,11 +157,11 @@ Verschleißrate  ∝ Reifen.Verschleißfaktor × Sturz_Extremität × Spur_Extre
 Ausfallrisiko   ∝ (11 - Motor.Zuverlässigkeit) × (11 - Getriebe.Zuverlässigkeit) × ECU_Mapping_Stufe
 ```
 
-Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen Min/Max des jeweiligen Parameterbereichs (Abschnitt 4). Reicht für die Demo völlig aus und ist später beliebig verfeinerbar.
+Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen Min/Max des jeweiligen Parameterbereichs (Abschnitt 5). Reicht für die Demo völlig aus und ist später beliebig verfeinerbar.
 
 ---
 
-## 6. Regelwerk "DTM Demo 2026"
+## 7. Regelwerk "DTM Demo 2026"
 
 1. Max. Leistung: **550 PS**
 2. Mindestgewicht: **1.050 kg** (inkl. Fahrer)
@@ -151,7 +177,7 @@ Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen M
 
 ---
 
-## 7. Prüfstation & Bestechung
+## 8. Prüfstation & Bestechung
 
 - Vor jedem Rennen: automatischer Abgleich Auto-Konfiguration gegen aktives Regelwerk
 - **Konform:** Rennfreigabe
@@ -161,7 +187,9 @@ Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen M
 
 ---
 
-## 8. Datenstruktur (Beispiel-Schema, JSON)
+## 9. Datenstruktur (Beispiel-Schema, JSON)
+
+Jedes Bauteil referenziert zusätzlich sein Low-Poly-Mesh und den Socket, an dem es in der Werkstatt-Ansicht sichtbar wird (siehe Abschnitt 3.3).
 
 ```json
 {
@@ -173,7 +201,9 @@ Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen M
   "torque_nm": 430,
   "weight_kg": 185,
   "reliability": 9,
-  "price": 180000
+  "price": 180000,
+  "mesh": "res://assets/models/parts/engines/e1_voss_v8.tres",
+  "socket": "engine_bay"
 }
 ```
 
@@ -191,7 +221,7 @@ Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen M
 
 ---
 
-## 9. Repo-Struktur (Vorschlag)
+## 10. Repo-Struktur (Vorschlag)
 
 ```
 motorsport-manager/
@@ -212,15 +242,23 @@ motorsport-manager/
 │   └── tracks/
 ├── scripts/
 │   ├── core/          # Bauteil-/Statberechnung, Regel-Validator
-│   ├── ui/             # Werkstatt, Setup-Screen
-│   └── race/           # Renn-Simulation, KI
+│   ├── ui/             # HUD, Menüs
+│   ├── race/           # Renn-Simulation, KI (2D Top-Down)
+│   └── garage/         # Freie Kamera, Bauteil-Socket-System (3D)
 ├── scenes/
+│   ├── race/            # 2D-Pixelart-Szenen
+│   └── garage/           # Low-Poly-3D-Szenen
 └── assets/
+    ├── sprites/           # Pixelart für die Rennansicht
+    ├── models/parts/       # Low-Poly-Meshes je Bauteil (Motoren, Bremsen, Aero, ...)
+    └── textures/
 ```
 
 ---
 
-## 10. Offene Punkte für später
-- Zündkerzen, Ansaugung als eigene Bauteilkategorien (noch nicht in Demo-Scope)
+## 11. Offene Punkte für später
+
+- Zündkerzen, Ansaugung, Kühlsystem, Motoröl als eigene Bauteilkategorien (noch nicht in Demo-Scope)
+- Low-Poly-Assets für alle Bauteilkategorien der Vollversion (Asset-Pipeline/Workflow noch festzulegen)
 - Weitere Klassen (F1, Kart, Prototyp) als eigene Regelwerke/Teile-Pools
 - Historische Saisons/Strecken als Datenpakete
