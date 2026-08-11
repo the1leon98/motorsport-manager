@@ -1,0 +1,15 @@
+{
+	"regulation_id": "dtm_demo_2026",
+	"name": "DTM Demo-Klasse 2026",
+	"rules": [
+		{ "type": "max_power", "value_hp": 550 },
+		{ "type": "min_weight", "value_kg": 900 },
+		{ "type": "max_boost", "value_bar": 2.0, "applies_to_aspiration": ["turbo"] },
+		{ "type": "tire_allowance", "allowed_part_ids": ["T1", "T2", "T3"] },
+		{ "type": "banned_part", "part_id": "G3", "reason": "Unhomologiertes Prototyp-Getriebe" },
+		{ "type": "banned_part", "part_id": "A3", "reason": "Heckspoiler überschreitet die maximal zulässigen Abmessungen" },
+		{ "type": "part_unlock", "part_id": "B3", "unlocks_from_race": 3, "reason": "Carbon-Keramik-Bremsen erst ab Rennen 3 homologiert" },
+		{ "type": "max_camber", "value_deg": -4.0 },
+		{ "type": "min_ballast_if_underweight", "value_kg": 20 }
+	]
+}

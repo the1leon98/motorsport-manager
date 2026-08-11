@@ -1,0 +1,17 @@
+[
+	{
+		"id": "C1",
+		"name": "Standard-Fahrwerk",
+		"weight_kg": 80
+	},
+	{
+		"id": "C2",
+		"name": "Sport-Fahrwerk",
+		"weight_kg": 70
+	},
+	{
+		"id": "C3",
+		"name": "Leichtbau-Fahrwerk",
+		"weight_kg": 60
+	}
+]

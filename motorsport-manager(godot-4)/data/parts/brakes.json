@@ -1,0 +1,20 @@
+[
+	{
+		"id": "B1",
+		"name": "Stahl Standard",
+		"weight_kg": 20,
+		"brake_power": 6.0
+	},
+	{
+		"id": "B2",
+		"name": "Verbund Sport",
+		"weight_kg": 16,
+		"brake_power": 8.0
+	},
+	{
+		"id": "B3",
+		"name": "Carbon-Keramik Prototyp",
+		"weight_kg": 12,
+		"brake_power": 9.5
+	}
+]

@@ -1,0 +1,29 @@
+[
+	{
+		"id": "E1",
+		"name": "Voss V8 4.0 Sauger",
+		"power_hp": 380,
+		"weight_kg": 140,
+		"reliability": 9,
+		"aspiration": "natural",
+		"boost_bar_max": 0.0
+	},
+	{
+		"id": "E2",
+		"name": "Voss V6 3.0 Turbo",
+		"power_hp": 420,
+		"weight_kg": 120,
+		"reliability": 8,
+		"aspiration": "turbo",
+		"boost_bar_max": 1.8
+	},
+	{
+		"id": "E3",
+		"name": "Voss V6 3.0 Turbo Sport (Prototyp)",
+		"power_hp": 460,
+		"weight_kg": 110,
+		"reliability": 6,
+		"aspiration": "turbo",
+		"boost_bar_max": 2.4
+	}
+]

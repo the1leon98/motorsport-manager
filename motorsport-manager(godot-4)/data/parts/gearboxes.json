@@ -1,0 +1,20 @@
+[
+	{
+		"id": "G1",
+		"name": "Standard-Sequential",
+		"weight_kg": 45,
+		"reliability": 9
+	},
+	{
+		"id": "G2",
+		"name": "Sequential Sport",
+		"weight_kg": 40,
+		"reliability": 8
+	},
+	{
+		"id": "G3",
+		"name": "Sequential Prototyp (unhomologiert)",
+		"weight_kg": 36,
+		"reliability": 6
+	}
+]

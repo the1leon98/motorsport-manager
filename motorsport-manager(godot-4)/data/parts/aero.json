@@ -1,0 +1,37 @@
+[
+	{
+		"id": "A1",
+		"name": "Heckspoiler Klein",
+		"type": "rear_wing",
+		"downforce": 2.0,
+		"drag": 1.0
+	},
+	{
+		"id": "A2",
+		"name": "Heckspoiler Medium",
+		"type": "rear_wing",
+		"downforce": 3.0,
+		"drag": 1.5
+	},
+	{
+		"id": "A3",
+		"name": "Heckspoiler Groß (Prototyp)",
+		"type": "rear_wing",
+		"downforce": 5.0,
+		"drag": 3.0
+	},
+	{
+		"id": "A4",
+		"name": "Heckdiffusor Standard",
+		"type": "diffuser",
+		"downforce": 2.0,
+		"drag": 0.5
+	},
+	{
+		"id": "A5",
+		"name": "Heckdiffusor Sport",
+		"type": "diffuser",
+		"downforce": 3.0,
+		"drag": 1.0
+	}
+]
