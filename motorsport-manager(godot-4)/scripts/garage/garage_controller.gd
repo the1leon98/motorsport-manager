@@ -78,8 +78,11 @@ func _refresh_car_selector() -> void:
 
 
 func _car_display_name(index: int, a_car: CarConfig) -> String:
-	var chassis: Dictionary = PartsDatabase.get_part("chassis", a_car.chassis_id)
-	return "Fahrzeug %d – %s" % [index + 1, chassis.get("name", a_car.chassis_id)]
+	var name: String = a_car.model_name
+	if name.is_empty():
+		var chassis: Dictionary = PartsDatabase.get_part("chassis", a_car.chassis_id)
+		name = chassis.get("name", a_car.chassis_id)
+	return "Fahrzeug %d – %s" % [index + 1, name]
 
 
 func _on_car_selected(index: int) -> void:

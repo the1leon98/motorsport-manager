@@ -3,6 +3,10 @@ class_name CarConfig
 # Repräsentiert ein zusammengebautes Fahrzeug: gewählte Bauteil-IDs + Setup-Parameter.
 # Als Resource speicherbar (.tres), z.B. um den Autozustand eines Spielstands abzulegen.
 
+# Marketing-Name aus dem Autohaus (z.B. "Voss GT30"), unabhängig von den
+# austauschbaren Bauteilen darunter. Für die Anzeige in Hub/Werkstatt.
+@export var model_name: String = ""
+
 # --- Bauteilwahl (IDs aus data/parts/*.json) ---
 @export var engine_id: String = ""
 @export var gearbox_id: String = ""

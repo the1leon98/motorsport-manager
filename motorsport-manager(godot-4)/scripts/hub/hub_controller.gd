@@ -40,5 +40,7 @@ func _refresh_header() -> void:
 
 
 func _car_display_name(car: CarConfig) -> String:
+	if not car.model_name.is_empty():
+		return car.model_name
 	var chassis: Dictionary = PartsDatabase.get_part("chassis", car.chassis_id)
 	return chassis.get("name", car.chassis_id)

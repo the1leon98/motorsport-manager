@@ -52,6 +52,7 @@ func buy_car(car_id: String) -> bool:
 
 	var starter: Dictionary = car_data.get("starter_parts", {})
 	var new_car := CarConfig.new()
+	new_car.model_name = car_data.get("name", "")
 	new_car.engine_id = starter.get("engine_id", "")
 	new_car.gearbox_id = starter.get("gearbox_id", "")
 	new_car.chassis_id = starter.get("chassis_id", "")
