@@ -30,6 +30,7 @@ var part_option_buttons: Dictionary = {}  # field_name -> OptionButton
 var setup_sliders: Dictionary = {}  # field_name -> HSlider
 var ecu_option_button: OptionButton
 var stats_label: Label
+var compliance_label: Label
 
 
 func _ready() -> void:
@@ -152,6 +153,10 @@ func _build_stats_panel() -> void:
 	stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	stats_panel.add_child(stats_label)
 
+	compliance_label = Label.new()
+	compliance_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	stats_panel.add_child(compliance_label)
+
 
 func _refresh() -> void:
 	var stats: Dictionary = StatsCalculator.calculate(car, PartsDatabase)
@@ -160,3 +165,12 @@ func _refresh() -> void:
 		stats["accel_0_100_s"], stats["corner_grip_index"], stats["braking_distance_m"],
 		stats["tire_wear_rate"], stats["failure_risk_pct"],
 	]
+
+	var result: Dictionary = RegulationValidator.validate(car, stats, PartsDatabase, REGULATION_ID, CURRENT_RACE_NUMBER)
+	if result["compliant"]:
+		compliance_label.text = "✓ Regelkonform"
+	else:
+		var lines: Array = ["✗ Nicht regelkonform:"]
+		for v in result["violations"]:
+			lines.append(" - %s" % v)
+		compliance_label.text = "\n".join(lines)
