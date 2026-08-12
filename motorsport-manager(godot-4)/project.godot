@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PartsDatabase="*res://scripts/core/parts_database.gd"
 SceneManager="*res://scripts/core/scene_manager.gd"
 GameState="*res://scripts/core/game_state.gd"
+SaveManager="*res://scripts/core/save_manager.gd"
 
 [display]
 

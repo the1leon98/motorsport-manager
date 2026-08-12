@@ -1,7 +1,8 @@
 extends Resource
 class_name Team
 # Laufzeit-Zustand eines Teams: besessene Fahrzeuge, Budget, Saisonfortschritt.
-# Kein Speichern/Laden auf Festplatte im Grundgerüst – geht bei Neustart verloren.
+# Wird über SaveManager (scripts/core/save_manager.gd) als Teil von
+# SaveData nach user://savegame.tres gespeichert/geladen.
 
 @export var cars: Array[CarConfig] = []
 @export var budget: float = 0.0
