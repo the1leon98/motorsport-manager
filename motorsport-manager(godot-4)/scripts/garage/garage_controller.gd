@@ -29,6 +29,7 @@ var car := CarConfig.new()
 var part_option_buttons: Dictionary = {}  # field_name -> OptionButton
 var setup_sliders: Dictionary = {}  # field_name -> HSlider
 var ecu_option_button: OptionButton
+var stats_label: Label
 
 
 func _ready() -> void:
@@ -36,11 +37,8 @@ func _ready() -> void:
 	_set_default_car()
 	_build_part_selectors()
 	_build_setup_controls()
+	_build_stats_panel()
 	_refresh()
-
-
-func _refresh() -> void:
-	pass  # wird in Task 4 und 5 mit echter Logik gefüllt
 
 
 func _set_default_car() -> void:
@@ -147,3 +145,18 @@ func _add_slider(field: String, label_text: String, min_val: float, max_val: flo
 	)
 	setup_panel.add_child(slider)
 	setup_sliders[field] = slider
+
+
+func _build_stats_panel() -> void:
+	stats_label = Label.new()
+	stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	stats_panel.add_child(stats_label)
+
+
+func _refresh() -> void:
+	var stats: Dictionary = StatsCalculator.calculate(car, PartsDatabase)
+	stats_label.text = "PS: %.0f    Gewicht: %.0f kg    Topspeed: %.0f km/h\n0-100: %.2f s    Kurvengrip: %.1f    Bremsweg: %.0f m\nReifenverschleiß: %.2f    Ausfallrisiko: %.1f%%" % [
+		stats["power_hp"], stats["weight_kg"], stats["topspeed_kmh"],
+		stats["accel_0_100_s"], stats["corner_grip_index"], stats["braking_distance_m"],
+		stats["tire_wear_rate"], stats["failure_risk_pct"],
+	]
