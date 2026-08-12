@@ -8,3 +8,7 @@ class_name Team
 @export var budget: float = 0.0
 @export var current_race_number: int = 1
 @export var selected_car_index: int = -1  # Index in cars, -1 = kein Fahrzeug gewählt
+
+# Image-/Ruf-Wert 0..100, sinkt bei aufgeflogener Bestechung (siehe
+# pit_lane_controller.gd) und erhöht dabei das Risiko künftiger Bestechungen.
+@export var reputation: float = 100.0

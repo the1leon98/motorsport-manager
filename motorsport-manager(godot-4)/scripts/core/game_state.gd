@@ -23,6 +23,7 @@ func start_new_game(mode: String) -> void:
 	team.budget = STARTING_BUDGET
 	team.current_race_number = 1
 	team.selected_car_index = -1
+	team.reputation = 100.0
 	race_cleared = false
 
 
@@ -71,6 +72,11 @@ func get_current_track() -> Dictionary:
 		if track["track_number"] == team.current_race_number:
 			return track
 	return {}
+
+
+func advance_race() -> void:
+	var total_tracks: int = PartsDatabase.get_all_tracks().size()
+	team.current_race_number = min(team.current_race_number + 1, total_tracks)
 
 
 static func format_money(amount: float) -> String:

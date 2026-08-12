@@ -62,6 +62,15 @@ offset_bottom = 80.0
 theme_override_font_sizes/font_size = 22
 text = "Zeit: 00:00.00"
 
+[node name="PositionLabel" type="Label" parent="Hud"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 260.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 22
+text = "Platz -/-"
+
 [node name="FinishPanel" type="CenterContainer" parent="."]
 visible = false
 layout_mode = 1
@@ -85,6 +94,10 @@ text = "Ziel!"
 layout_mode = 2
 horizontal_alignment = 1
 text = "Zielzeit: -"
+
+[node name="ResultsList" type="VBoxContainer" parent="FinishPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="BackButton" type="Button" parent="FinishPanel/VBoxContainer"]
 layout_mode = 2

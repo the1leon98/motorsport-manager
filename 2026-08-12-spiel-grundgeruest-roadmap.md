@@ -349,6 +349,42 @@ Screens (fehlende Zustandsübergabe, falsche Rücksprünge) erst, wenn der
 komplette Loop steht – das verdient einen eigenen, expliziten
 Verifikationsdurchlauf statt "hoffentlich passt's".
 
+> **Verifiziert am 2026-08-12** per zwei separaten Headless-Läufen (kein
+> Display verfügbar; gleiches Vorgehen wie bei den Save/Load-Verifikationen).
+> Ein temporäres Autoload-Testskript (`test_e2e_run1.gd`, danach entfernt,
+> `project.godot` währenddessen um einen Eintrag ergänzt und hinterher exakt
+> zurückgesetzt) hat den kompletten Durchlauf inklusive Button-Klicks
+> nachgestellt: Hauptmenü → "Karriere" → Hub → Autohaus (Voss GT30 kaufen) →
+> Werkstatt (Fahrzeug/Compliance prüfen) → Hub → Boxengasse (über Hub-Pin,
+> Startfreigabe) → Hub → Saison (11 Strecken gelistet, "Fahren" auf Norring) →
+> Boxengasse (zweiter Zugang, Freigabe weiterhin gültig) → Rennen (Zeitfahren
+> mit `Engine.time_scale` beschleunigt, 10 Runden, Zielzeit angezeigt) → Hub.
+> Alle 62 Prüfpunkte (Budget-/Fahrzeuganzeigen, Pin-Sperren, Regelkonformität,
+> Szenenübergänge) waren erfolgreich. Anschließend wurde `NOTIFICATION_WM_CLOSE_REQUEST`
+> simuliert (derselbe Codepfad wie beim echten Fensterschließen), was
+> erwartungsgemäß speichert und den Prozess beendet. Ein zweiter,
+> unabhängiger Headless-Prozess (`test_e2e_run2.gd`) hat danach frisch
+> gestartet, den "Fortsetzen"-Button geklickt und geprüft, dass Budget
+> (55.000), Fahrzeug (Voss GT30) und Rennnummer (1) korrekt aus der
+> `user://savegame.tres`-Datei geladen wurden – alle 11 Prüfpunkte
+> erfolgreich. Der Loop schließt sich also durchgängig, inklusive
+> Speichern/Laden über einen echten Prozess-Neustart hinweg.
+>
+> **Eine Beobachtung, kein Fehlschlag:** `GameState.team.current_race_number`
+> wird nach einem abgeschlossenen Rennen aktuell nirgends erhöht – nach
+> Rückkehr in den Hub zeigt "Nächstes Rennen" weiterhin "Norring (Rennen
+> 1/11)", obwohl das Rennen bereits gefahren wurde, und die Saison-Ansicht
+> würde bei erneutem Aufruf weiterhin nur Rennen 1 als "Fahren"-fähig
+> anzeigen. Das ist keine Regression aus dieser Verifikation, sondern eine
+> Lücke, die laut Phase-H-Notizen ("erstmal keine Rennergebnisse fürs
+> Grundgerüst speichern") bisher bewusst ausgeklammert war, aber jetzt beim
+> Ende-zu-Ende-Test sichtbar wurde: ohne Fortschritts-Inkrement bleibt die
+> Demo-Saison faktisch bei einem einzigen wiederholbaren Rennen stehen. Fix
+> wäre trivial (`GameState.team.current_race_number += 1` beim Renn-Ende),
+> aber bewusst nicht in dieser reinen Verifikationsphase umgesetzt – siehe
+> "Explizit nicht Teil des Grundgerüsts" unten (neuer Punkt
+> "Saisonfortschritt nach Rennende").
+
 ---
 
 ## Explizit nicht Teil des Grundgerüsts
@@ -358,13 +394,20 @@ Verifikationsdurchlauf statt "hoffentlich passt's".
 - **Low-Poly-3D-Werkstattgrafik** (README-Roadmap Punkt 7) – alle Screens
   bleiben im Grundgerüst reine 2D-Platzhalter-UI (Standard-Godot-Controls),
   wie schon in der bestehenden Werkstatt.
-- **Speichern/Laden auf Festplatte** – Team-Zustand (Phase C) ist zunächst
-  reiner Laufzeit-Zustand.
+- **Speichern/Laden auf Festplatte** – ursprünglich zurückgestellt, ist
+  aber mittlerweile umgesetzt und in Phase J mitverifiziert, siehe
+  `2026-08-12-speichern-laden.md`.
 - **Historische Inhalte, weitere Klassen** (README-Roadmap Punkt 8).
 - **Feinschliff/Balancing** (README-Roadmap Punkt 9).
 - **Fahrzeug-Verkauf im Autohaus**, **Rennergebnis-/Punkte-Historie** – als
   "nice to have später" in den jeweiligen Phasen vermerkt, nicht Teil des
   Grundgerüst-Minimalumfangs.
+- **Saisonfortschritt nach Rennende** – beim Phase-J-Ende-zu-Ende-Test
+  aufgefallen (siehe Verifikationsnotiz oben): `current_race_number` wird
+  nach einem abgeschlossenen Rennen aktuell nicht erhöht, die Demo bleibt
+  bei Rennen 1 stehen. Passt zur bewussten Phase-H-Entscheidung
+  "erstmal keine Rennergebnisse speichern", ist aber ein Fast-Follow, sobald
+  eine echte Mehrfach-Rennen-Saison getestet werden soll.
 
 ---
 

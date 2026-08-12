@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func _refresh_header() -> void:
-	budget_label.text = "Budget: %s" % GameState.format_money(GameState.team.budget)
+	budget_label.text = "Budget: %s · Ruf: %d/100" % [GameState.format_money(GameState.team.budget), int(round(GameState.team.reputation))]
 
 	var selected_car: CarConfig = GameState.get_selected_car()
 	car_label.text = "Fahrzeug: %s" % (_car_display_name(selected_car) if selected_car else "keins")

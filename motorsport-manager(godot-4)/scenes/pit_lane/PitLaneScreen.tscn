@@ -65,6 +65,11 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 40)
 text = "Bestechen"
 
+[node name="RiskLabel" type="Label" parent="ContentContainer/VBoxContainer"]
+layout_mode = 2
+autowrap_mode = 3
+text = ""
+
 [node name="StatusLabel" type="Label" parent="ContentContainer/VBoxContainer"]
 layout_mode = 2
 autowrap_mode = 3
@@ -85,3 +90,9 @@ text = "Zum Rennen"
 layout_mode = 2
 custom_minimum_size = Vector2(220, 40)
 text = "< Zurück zum Hub"
+
+[node name="BribeConfirmDialog" type="ConfirmationDialog" parent="."]
+title = "Bestechung bestätigen"
+initial_position = 1
+ok_button_text = "Bestechen"
+cancel_button_text = "Abbrechen"
