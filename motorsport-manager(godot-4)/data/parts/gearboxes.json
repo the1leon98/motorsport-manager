@@ -3,18 +3,28 @@
 		"id": "G1",
 		"name": "Standard-Sequential",
 		"weight_kg": 45,
-		"reliability": 9
+		"reliability": 9,
+		"price": 40000
 	},
 	{
 		"id": "G2",
-		"name": "Sequential Sport",
-		"weight_kg": 40,
-		"reliability": 8
+		"name": "Sport-Sequential",
+		"weight_kg": 42,
+		"reliability": 7,
+		"price": 70000
 	},
 	{
 		"id": "G3",
-		"name": "Sequential Prototyp (unhomologiert)",
-		"weight_kg": 36,
-		"reliability": 6
+		"name": "Race-Sequential",
+		"weight_kg": 40,
+		"reliability": 6,
+		"price": 110000
+	},
+	{
+		"id": "G4",
+		"name": "Verstärktes Standardgetriebe",
+		"weight_kg": 50,
+		"reliability": 10,
+		"price": 35000
 	}
 ]

@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/hub/hub_controller.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.196, 0.32, 0.196, 1)
+
+[node name="HubScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="MapArea" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("1")
+
+[node name="GaragePin" type="Button" parent="MapArea"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 150.0
+offset_right = 380.0
+offset_bottom = 200.0
+text = "Werkstatt"
+
+[node name="AutohausPin" type="Button" parent="MapArea"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 120.0
+offset_right = 920.0
+offset_bottom = 170.0
+text = "Autohaus"
+
+[node name="PitLanePin" type="Button" parent="MapArea"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 500.0
+offset_right = 1160.0
+offset_bottom = 550.0
+text = "Boxengasse"
+
+[node name="SeasonPin" type="Button" parent="MapArea"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 550.0
+offset_right = 520.0
+offset_bottom = 600.0
+text = "Saison"
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 160.0
+offset_bottom = 52.0
+text = "< Hauptmenü"
+
+[node name="HeaderBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HeaderBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderBar/MarginContainer"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 48
+
+[node name="BudgetLabel" type="Label" parent="HeaderBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Budget: -"
+
+[node name="CarLabel" type="Label" parent="HeaderBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fahrzeug: -"
+
+[node name="NextRaceLabel" type="Label" parent="HeaderBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Nächstes Rennen: -"

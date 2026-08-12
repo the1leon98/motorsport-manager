@@ -1,9 +1,7 @@
 extends Control
 # Werkstatt-Bildschirm (Platzhalter-UI): Bauteile wählen, Setup einstellen,
-# Live-Stats + Regelkonformität anzeigen.
-
-const REGULATION_ID := "dtm_demo_2026"
-const CURRENT_RACE_NUMBER := 1
+# Live-Stats + Regelkonformität anzeigen. Arbeitet auf dem aus dem
+# Team-Inventar (GameState) gewählten Fahrzeug statt auf einem Fixauto.
 
 const PART_CATEGORIES := [
 	{"key": "engine", "label": "Motor", "field": "engine_id"},
@@ -21,11 +19,17 @@ const AERO_SLOTS := [
 const ECU_OPTIONS := ["qualifying", "race", "fuelsaving"]
 const ECU_LABELS := {"qualifying": "Qualifying", "race": "Race", "fuelsaving": "Fuelsaving"}
 
-@onready var parts_panel: VBoxContainer = $MarginContainer/HBoxContainer/PartsPanel
-@onready var setup_panel: VBoxContainer = $MarginContainer/HBoxContainer/SetupPanel
-@onready var stats_panel: VBoxContainer = $MarginContainer/HBoxContainer/StatsPanel
+@onready var no_car_panel: CenterContainer = $NoCarPanel
+@onready var content_container: HBoxContainer = $ContentContainer
+@onready var parts_panel: VBoxContainer = $ContentContainer/PartsPanel
+@onready var setup_panel: VBoxContainer = $ContentContainer/SetupPanel
+@onready var stats_panel: VBoxContainer = $ContentContainer/StatsPanel
 
-var car := CarConfig.new()
+@onready var back_button: Button = $TopBar/BackButton
+@onready var car_selector: OptionButton = $TopBar/CarSelector
+@onready var no_car_back_button: Button = $NoCarPanel/VBoxContainer/BackButton
+
+var car: CarConfig
 var part_option_buttons: Dictionary = {}  # field_name -> OptionButton
 var setup_sliders: Dictionary = {}  # field_name -> HSlider
 var ecu_option_button: OptionButton
@@ -35,21 +39,62 @@ var compliance_label: Label
 
 func _ready() -> void:
 	await get_tree().process_frame  # PartsDatabase-Autoload fertig laden lassen
-	_set_default_car()
+
+	back_button.pressed.connect(func(): SceneManager.goto_screen("hub"))
+	no_car_back_button.pressed.connect(func(): SceneManager.goto_screen("autohaus"))
+	car_selector.item_selected.connect(_on_car_selected)
+
+	if not GameState.has_any_car():
+		_show_no_car_state()
+		return
+
+	_show_car_state()
+	_refresh_car_selector()
+	car = GameState.get_selected_car()
 	_build_part_selectors()
 	_build_setup_controls()
 	_build_stats_panel()
 	_refresh()
 
 
-func _set_default_car() -> void:
-	car.engine_id = "E1"
-	car.gearbox_id = "G1"
-	car.chassis_id = "C1"
-	car.tire_id = "T2"
-	car.brake_id = "B1"
-	car.rear_wing_id = "A2"
-	car.diffuser_id = "A4"
+func _show_no_car_state() -> void:
+	no_car_panel.visible = true
+	content_container.visible = false
+	car_selector.visible = false
+
+
+func _show_car_state() -> void:
+	no_car_panel.visible = false
+	content_container.visible = true
+	car_selector.visible = true
+
+
+func _refresh_car_selector() -> void:
+	car_selector.clear()
+	for i in GameState.team.cars.size():
+		car_selector.add_item(_car_display_name(i, GameState.team.cars[i]))
+		car_selector.set_item_metadata(car_selector.item_count - 1, i)
+	_select_current_value(car_selector, GameState.team.selected_car_index)
+
+
+func _car_display_name(index: int, a_car: CarConfig) -> String:
+	var chassis: Dictionary = PartsDatabase.get_part("chassis", a_car.chassis_id)
+	return "Fahrzeug %d – %s" % [index + 1, chassis.get("name", a_car.chassis_id)]
+
+
+func _on_car_selected(index: int) -> void:
+	GameState.select_car(car_selector.get_item_metadata(index))
+	car = GameState.get_selected_car()
+	_sync_controls_to_car()
+	_refresh()
+
+
+func _sync_controls_to_car() -> void:
+	for field in part_option_buttons.keys():
+		_select_current_value(part_option_buttons[field], car.get(field))
+	for field in setup_sliders.keys():
+		setup_sliders[field].value = car.get(field)
+	_select_current_value(ecu_option_button, car.ecu_mapping)
 
 
 func _build_part_selectors() -> void:
@@ -170,7 +215,7 @@ func _refresh() -> void:
 		stats["tire_wear_rate"], stats["failure_risk_pct"],
 	]
 
-	var result: Dictionary = RegulationValidator.validate(car, stats, PartsDatabase, REGULATION_ID, CURRENT_RACE_NUMBER)
+	var result: Dictionary = RegulationValidator.validate(car, stats, PartsDatabase, GameState.REGULATION_ID, GameState.team.current_race_number)
 	if result["compliant"]:
 		compliance_label.text = "✓ Regelkonform"
 	else:

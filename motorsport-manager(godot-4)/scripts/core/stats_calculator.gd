@@ -6,8 +6,8 @@ class_name StatsCalculator
 # ---- Balancing-Konstanten ----
 # Platzhalter, gedacht zum Austesten/Anpassen – keine "echte" Physik, sondern
 # kalibriert auf plausible Zielwerte (z.B. Topspeed ~290 km/h bei mittlerem Setup).
-const BASE_VEHICLE_WEIGHT_KG := 650.0  # Rohkarosserie/Räder/Sicherheitszelle/Tank – nicht in data/parts enthalten
-const TOPSPEED_CONSTANT := 900.0
+const BASE_VEHICLE_WEIGHT_KG := 780.0  # Rohkarosserie/Räder/Sicherheitszelle/Tank – nicht in data/parts enthalten
+const TOPSPEED_CONSTANT := 1000.0
 const ACCEL_CONSTANT := 1.16
 const BRAKE_CONSTANT := 357.0
 const FAILURE_CONSTANT := 0.5

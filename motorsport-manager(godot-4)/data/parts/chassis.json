@@ -2,16 +2,25 @@
 	{
 		"id": "C1",
 		"name": "Standard-Fahrwerk",
-		"weight_kg": 80
+		"weight_kg": 60,
+		"price": 50000
 	},
 	{
 		"id": "C2",
 		"name": "Sport-Fahrwerk",
-		"weight_kg": 70
+		"weight_kg": 52,
+		"price": 90000
 	},
 	{
 		"id": "C3",
+		"name": "Renn-Fahrwerk Pro",
+		"weight_kg": 45,
+		"price": 150000
+	},
+	{
+		"id": "C4",
 		"name": "Leichtbau-Fahrwerk",
-		"weight_kg": 60
+		"weight_kg": 38,
+		"price": 130000
 	}
 ]

@@ -11,6 +11,8 @@ extends Node
 
 const PARTS_PATH := "res://data/parts/"
 const REGULATIONS_PATH := "res://data/regulations/"
+const CARS_PATH := "res://data/cars/showroom.json"
+const TRACKS_PATH := "res://data/tracks/tracks.json"
 
 const PART_FILES := {
 	"engine": "engines.json",
@@ -28,11 +30,15 @@ const REGULATION_FILES := [
 
 var parts: Dictionary = {}       # category -> { id: Dictionary(part_data) }
 var regulations: Dictionary = {} # regulation_id -> Dictionary(regulation_data)
+var cars: Dictionary = {}        # car_id -> Dictionary(car_data), z.B. für das Autohaus
+var tracks: Array = []           # Array[Dictionary(track_data)], sortiert nach track_number
 
 
 func _ready() -> void:
 	_load_all_parts()
 	_load_all_regulations()
+	_load_all_cars()
+	_load_all_tracks()
 
 
 func _load_all_parts() -> void:
@@ -54,6 +60,19 @@ func _load_all_regulations() -> void:
 	print("PartsDatabase: %d Regelwerk(e) geladen" % regulations.size())
 
 
+func _load_all_cars() -> void:
+	var list: Array = _load_json_array(CARS_PATH)
+	for car_data in list:
+		cars[car_data["id"]] = car_data
+	print("PartsDatabase: %d kaufbare(s) Fahrzeug(e) geladen" % cars.size())
+
+
+func _load_all_tracks() -> void:
+	tracks = _load_json_array(TRACKS_PATH)
+	tracks.sort_custom(func(a, b): return a["track_number"] < b["track_number"])
+	print("PartsDatabase: %d Strecke(n) geladen" % tracks.size())
+
+
 func get_part(category: String, id: String) -> Dictionary:
 	if parts.has(category) and parts[category].has(id):
 		return parts[category][id]
@@ -69,6 +88,29 @@ func get_all_parts(category: String) -> Array:
 
 func get_regulation(regulation_id: String) -> Dictionary:
 	return regulations.get(regulation_id, {})
+
+
+func get_car(id: String) -> Dictionary:
+	if cars.has(id):
+		return cars[id]
+	push_error("PartsDatabase: Fahrzeug nicht gefunden: %s" % id)
+	return {}
+
+
+func get_all_cars() -> Array:
+	return cars.values()
+
+
+func get_track(id: String) -> Dictionary:
+	for track in tracks:
+		if track["id"] == id:
+			return track
+	push_error("PartsDatabase: Strecke nicht gefunden: %s" % id)
+	return {}
+
+
+func get_all_tracks() -> Array:
+	return tracks
 
 
 # ---- interne Hilfsfunktionen ----

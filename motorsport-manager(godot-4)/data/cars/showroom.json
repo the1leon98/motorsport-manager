@@ -1,0 +1,15 @@
+[
+	{
+		"id": "CAR_VOSS_GT30",
+		"name": "Voss GT30",
+		"description": "Solides Einsteiger-Tourenwagen-Chassis für die DTM Demo-Klasse. Wird mit Basis-Bauteilen ausgeliefert und in der Werkstatt weiter ausgebaut.",
+		"price": 145000,
+		"starter_parts": {
+			"engine_id": "E1",
+			"gearbox_id": "G1",
+			"chassis_id": "C1",
+			"tire_id": "T2",
+			"brake_id": "B1"
+		}
+	}
+]

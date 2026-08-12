@@ -1,0 +1,118 @@
+[
+	{
+		"id": "norring",
+		"track_number": 1,
+		"name": "Norring",
+		"length_km": 3.6,
+		"corners": 10,
+		"laps": 10,
+		"playable": true,
+		"waypoints": [
+			{ "x": 200, "y": 450 },
+			{ "x": 200, "y": 250 },
+			{ "x": 350, "y": 120 },
+			{ "x": 700, "y": 100 },
+			{ "x": 950, "y": 150 },
+			{ "x": 1150, "y": 120 },
+			{ "x": 1350, "y": 200 },
+			{ "x": 1420, "y": 400 },
+			{ "x": 1350, "y": 600 },
+			{ "x": 1150, "y": 700 },
+			{ "x": 900, "y": 650 },
+			{ "x": 750, "y": 720 },
+			{ "x": 550, "y": 700 },
+			{ "x": 350, "y": 650 },
+			{ "x": 200, "y": 550 }
+		]
+	},
+	{
+		"id": "huegelkamp",
+		"track_number": 2,
+		"name": "Hügelkamp",
+		"length_km": 4.8,
+		"corners": 12,
+		"laps": 7,
+		"playable": false
+	},
+	{
+		"id": "waldsee_ring",
+		"track_number": 3,
+		"name": "Waldsee-Ring",
+		"length_km": 3.2,
+		"corners": 9,
+		"laps": 11,
+		"playable": false
+	},
+	{
+		"id": "kesselberg",
+		"track_number": 4,
+		"name": "Kesselberg",
+		"length_km": 4.2,
+		"corners": 11,
+		"laps": 8,
+		"playable": false
+	},
+	{
+		"id": "distelheim",
+		"track_number": 5,
+		"name": "Distelheim",
+		"length_km": 2.9,
+		"corners": 8,
+		"laps": 12,
+		"playable": false
+	},
+	{
+		"id": "rheinkurve",
+		"track_number": 6,
+		"name": "Rheinkurve",
+		"length_km": 5.1,
+		"corners": 14,
+		"laps": 6,
+		"playable": false
+	},
+	{
+		"id": "talwiese",
+		"track_number": 7,
+		"name": "Talwiese",
+		"length_km": 3.8,
+		"corners": 10,
+		"laps": 9,
+		"playable": false
+	},
+	{
+		"id": "bergstadt",
+		"track_number": 8,
+		"name": "Bergstadt",
+		"length_km": 4.5,
+		"corners": 13,
+		"laps": 7,
+		"playable": false
+	},
+	{
+		"id": "nordschanze",
+		"track_number": 9,
+		"name": "Nordschanze",
+		"length_km": 3.4,
+		"corners": 9,
+		"laps": 10,
+		"playable": false
+	},
+	{
+		"id": "fuerstenwald",
+		"track_number": 10,
+		"name": "Fürstenwald",
+		"length_km": 4.0,
+		"corners": 11,
+		"laps": 8,
+		"playable": false
+	},
+	{
+		"id": "seeblick_ring",
+		"track_number": 11,
+		"name": "Seeblick-Ring",
+		"length_km": 3.0,
+		"corners": 8,
+		"laps": 11,
+		"playable": false
+	}
+]

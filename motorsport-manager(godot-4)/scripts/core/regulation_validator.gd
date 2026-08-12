@@ -7,10 +7,11 @@ class_name RegulationValidator
 static func validate(car: CarConfig, stats: Dictionary, db: Node, regulation_id: String, current_race_number: int = 1) -> Dictionary:
 	var regulation: Dictionary = db.get_regulation(regulation_id)
 	var violations: Array = []
+	var violation_rules: Array = []  # dieselben Verstöße als Roh-Regel-Dictionaries (für z.B. Bestechungskosten)
 
 	if regulation.is_empty():
 		push_error("RegulationValidator: Regelwerk nicht gefunden: %s" % regulation_id)
-		return {"compliant": false, "violations": ["Regelwerk nicht gefunden: %s" % regulation_id]}
+		return {"compliant": false, "violations": ["Regelwerk nicht gefunden: %s" % regulation_id], "violation_rules": []}
 
 	var engine: Dictionary = db.get_part("engine", car.engine_id)
 	var installed_ids: Array = [
@@ -23,32 +24,39 @@ static func validate(car: CarConfig, stats: Dictionary, db: Node, regulation_id:
 			"max_power":
 				if stats["power_hp"] > rule["value_hp"]:
 					violations.append("Leistung %.0f PS überschreitet Limit von %d PS" % [stats["power_hp"], rule["value_hp"]])
+					violation_rules.append(rule)
 
 			"min_weight":
 				if stats["weight_kg"] < rule["value_kg"]:
 					violations.append("Gewicht %.0f kg unter Mindestgewicht von %d kg" % [stats["weight_kg"], rule["value_kg"]])
+					violation_rules.append(rule)
 
 			"max_boost":
 				if rule.get("applies_to_aspiration", []).has(engine.get("aspiration", "")):
 					var boost: float = engine.get("boost_bar_max", 0.0)
 					if boost > rule["value_bar"]:
 						violations.append("Ladedruck %.1f bar überschreitet Limit von %.1f bar" % [boost, rule["value_bar"]])
+						violation_rules.append(rule)
 
 			"tire_allowance":
 				if not rule["allowed_part_ids"].has(car.tire_id):
 					violations.append("Reifen %s ist für dieses Rennwochenende nicht homologiert" % car.tire_id)
+					violation_rules.append(rule)
 
 			"banned_part":
 				if installed_ids.has(rule["part_id"]):
 					violations.append("Bauteil %s ist nicht zulässig (%s)" % [rule["part_id"], rule.get("reason", "")])
+					violation_rules.append(rule)
 
 			"part_unlock":
 				if installed_ids.has(rule["part_id"]) and current_race_number < rule["unlocks_from_race"]:
 					violations.append("Bauteil %s ist erst ab Rennen %d freigegeben (%s)" % [rule["part_id"], rule["unlocks_from_race"], rule.get("reason", "")])
+					violation_rules.append(rule)
 
 			"max_camber":
 				if car.camber_deg < rule["value_deg"]:
 					violations.append("Sturz %.1f° überschreitet erlaubtes Maximum von %.1f°" % [car.camber_deg, rule["value_deg"]])
+					violation_rules.append(rule)
 
 			"min_ballast_if_underweight":
 				var raw_weight: float = stats["weight_kg"] - car.ballast_kg
@@ -56,8 +64,9 @@ static func validate(car: CarConfig, stats: Dictionary, db: Node, regulation_id:
 				if not min_weight_rule.is_empty() and raw_weight < min_weight_rule["value_kg"]:
 					if car.ballast_kg < rule["value_kg"]:
 						violations.append("Mindestens %d kg Ballast erforderlich, da das Fahrzeug ohne Ballast unter dem Mindestgewicht liegt" % rule["value_kg"])
+						violation_rules.append(rule)
 
-	return {"compliant": violations.is_empty(), "violations": violations}
+	return {"compliant": violations.is_empty(), "violations": violations, "violation_rules": violation_rules}
 
 
 static func _find_rule(regulation: Dictionary, type: String) -> Dictionary:

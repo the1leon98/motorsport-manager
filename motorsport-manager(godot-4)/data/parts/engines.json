@@ -2,28 +2,51 @@
 	{
 		"id": "E1",
 		"name": "Voss V8 4.0 Sauger",
-		"power_hp": 380,
-		"weight_kg": 140,
+		"power_hp": 460,
+		"weight_kg": 185,
 		"reliability": 9,
 		"aspiration": "natural",
-		"boost_bar_max": 0.0
+		"boost_bar_max": 0.0,
+		"price": 180000
 	},
 	{
 		"id": "E2",
-		"name": "Voss V6 3.0 Turbo",
-		"power_hp": 420,
-		"weight_kg": 120,
-		"reliability": 8,
+		"name": "Brandt I4 2.0 Turbo",
+		"power_hp": 520,
+		"weight_kg": 145,
+		"reliability": 6,
 		"aspiration": "turbo",
-		"boost_bar_max": 1.8
+		"boost_bar_max": 1.3,
+		"price": 160000
 	},
 	{
 		"id": "E3",
-		"name": "Voss V6 3.0 Turbo Sport (Prototyp)",
-		"power_hp": 460,
-		"weight_kg": 110,
-		"reliability": 6,
+		"name": "Kessler V6 3.2 BiTurbo",
+		"power_hp": 560,
+		"weight_kg": 168,
+		"reliability": 7,
 		"aspiration": "turbo",
-		"boost_bar_max": 2.4
+		"boost_bar_max": 1.6,
+		"price": 240000
+	},
+	{
+		"id": "E4",
+		"name": "Falkner V8 4.2 Kompressor",
+		"power_hp": 500,
+		"weight_kg": 205,
+		"reliability": 8,
+		"aspiration": "kompressor",
+		"boost_bar_max": 1.0,
+		"price": 200000
+	},
+	{
+		"id": "E5",
+		"name": "Reiner V10 4.5 Sauger",
+		"power_hp": 480,
+		"weight_kg": 178,
+		"reliability": 8,
+		"aspiration": "natural",
+		"boost_bar_max": 0.0,
+		"price": 260000
 	}
 ]

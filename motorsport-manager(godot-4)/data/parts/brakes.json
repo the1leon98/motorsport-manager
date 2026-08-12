@@ -2,19 +2,22 @@
 	{
 		"id": "B1",
 		"name": "Stahl Standard",
-		"weight_kg": 20,
-		"brake_power": 6.0
+		"weight_kg": 22,
+		"brake_power": 7.0,
+		"price": 25000
 	},
 	{
 		"id": "B2",
 		"name": "Verbund Sport",
 		"weight_kg": 16,
-		"brake_power": 8.0
+		"brake_power": 8.5,
+		"price": 55000
 	},
 	{
 		"id": "B3",
-		"name": "Carbon-Keramik Prototyp",
-		"weight_kg": 12,
-		"brake_power": 9.5
+		"name": "Carbon-Keramik Race",
+		"weight_kg": 11,
+		"brake_power": 10.0,
+		"price": 120000
 	}
 ]
