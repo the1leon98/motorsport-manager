@@ -110,7 +110,11 @@ func _select_current_value(option: OptionButton, current_id) -> void:
 
 func _build_setup_controls() -> void:
 	_add_slider("gear_ratio", "Getriebeübersetzung", 3.2, 4.6, 0.05)
+	_add_slider("spring_rate", "Federhärte (N/mm)", 60.0, 140.0, 1.0)
+	_add_slider("damper", "Dämpfer (Klicks)", 1.0, 10.0, 1.0)
+	_add_slider("sway_bar", "Stabilisator", 1.0, 10.0, 1.0)
 	_add_slider("camber_deg", "Sturz (°)", -4.0, -1.0, 0.1)
+	_add_slider("toe_deg", "Spur (°)", -0.5, 0.5, 0.05)
 	_add_slider("tire_pressure_bar", "Reifendruck (bar)", 1.6, 2.4, 0.05)
 	_add_slider("ballast_kg", "Ballast (kg)", 0.0, 60.0, 1.0)
 
