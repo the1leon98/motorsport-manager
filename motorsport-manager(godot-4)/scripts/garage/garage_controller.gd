@@ -18,18 +18,24 @@ const AERO_SLOTS := [
 	{"subtype": "diffuser", "label": "Diffusor", "field": "diffuser_id"},
 ]
 
+const ECU_OPTIONS := ["qualifying", "race", "fuelsaving"]
+const ECU_LABELS := {"qualifying": "Qualifying", "race": "Race", "fuelsaving": "Fuelsaving"}
+
 @onready var parts_panel: VBoxContainer = $MarginContainer/HBoxContainer/PartsPanel
 @onready var setup_panel: VBoxContainer = $MarginContainer/HBoxContainer/SetupPanel
 @onready var stats_panel: VBoxContainer = $MarginContainer/HBoxContainer/StatsPanel
 
 var car := CarConfig.new()
 var part_option_buttons: Dictionary = {}  # field_name -> OptionButton
+var setup_sliders: Dictionary = {}  # field_name -> HSlider
+var ecu_option_button: OptionButton
 
 
 func _ready() -> void:
 	await get_tree().process_frame  # PartsDatabase-Autoload fertig laden lassen
 	_set_default_car()
 	_build_part_selectors()
+	_build_setup_controls()
 	_refresh()
 
 
@@ -101,3 +107,43 @@ func _select_current_value(option: OptionButton, current_id) -> void:
 		if option.get_item_metadata(i) == current_id:
 			option.select(i)
 			return
+
+
+func _build_setup_controls() -> void:
+	_add_slider("gear_ratio", "Getriebeübersetzung", 3.2, 4.6, 0.05)
+	_add_slider("camber_deg", "Sturz (°)", -4.0, -1.0, 0.1)
+	_add_slider("tire_pressure_bar", "Reifendruck (bar)", 1.6, 2.4, 0.05)
+	_add_slider("ballast_kg", "Ballast (kg)", 0.0, 60.0, 1.0)
+
+	var ecu_label := Label.new()
+	ecu_label.text = "ECU-Mapping"
+	setup_panel.add_child(ecu_label)
+
+	ecu_option_button = OptionButton.new()
+	for ecu_key in ECU_OPTIONS:
+		ecu_option_button.add_item(ECU_LABELS[ecu_key])
+		ecu_option_button.set_item_metadata(ecu_option_button.item_count - 1, ecu_key)
+	_select_current_value(ecu_option_button, car.ecu_mapping)
+	ecu_option_button.item_selected.connect(func(index: int) -> void:
+		car.ecu_mapping = ecu_option_button.get_item_metadata(index)
+		_refresh()
+	)
+	setup_panel.add_child(ecu_option_button)
+
+
+func _add_slider(field: String, label_text: String, min_val: float, max_val: float, step: float) -> void:
+	var label := Label.new()
+	label.text = label_text
+	setup_panel.add_child(label)
+
+	var slider := HSlider.new()
+	slider.min_value = min_val
+	slider.max_value = max_val
+	slider.step = step
+	slider.value = car.get(field)
+	slider.value_changed.connect(func(value: float) -> void:
+		car.set(field, value)
+		_refresh()
+	)
+	setup_panel.add_child(slider)
+	setup_sliders[field] = slider
