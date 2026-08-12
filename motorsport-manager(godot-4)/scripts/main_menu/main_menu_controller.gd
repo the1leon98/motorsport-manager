@@ -3,15 +3,26 @@ extends Control
 # unterscheiden sich im Grundgerüst noch nicht (siehe Roadmap Phase B) –
 # beide starten einen frischen Spielstand und führen zum Hub.
 
+@onready var continue_button: Button = $CenterContainer/VBoxContainer/ContinueButton
 @onready var quick_play_button: Button = $CenterContainer/VBoxContainer/QuickPlayButton
 @onready var career_button: Button = $CenterContainer/VBoxContainer/CareerButton
 @onready var quit_button: Button = $CenterContainer/VBoxContainer/QuitButton
 
 
 func _ready() -> void:
+	continue_button.visible = SaveManager.has_save()
+	continue_button.pressed.connect(_on_continue_pressed)
 	quick_play_button.pressed.connect(_on_quick_play_pressed)
 	career_button.pressed.connect(_on_career_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+
+
+func _on_continue_pressed() -> void:
+	if SaveManager.load_game():
+		SceneManager.goto_screen("hub")
+	else:
+		push_error("Spielstand konnte nicht geladen werden.")
+		continue_button.visible = false
 
 
 func _on_quick_play_pressed() -> void:
