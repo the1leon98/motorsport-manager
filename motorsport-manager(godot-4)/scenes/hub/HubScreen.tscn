@@ -94,3 +94,15 @@ text = "Fahrzeug: -"
 [node name="NextRaceLabel" type="Label" parent="HeaderBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Nächstes Rennen: -"
+
+[node name="SaveButton" type="Button" parent="HeaderBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Speichern"
+
+[node name="SaveStatusLabel" type="Label" parent="HeaderBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = ""
+
+[node name="SaveStatusTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

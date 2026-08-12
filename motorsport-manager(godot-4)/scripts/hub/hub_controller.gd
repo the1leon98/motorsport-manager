@@ -12,6 +12,9 @@ extends Control
 @onready var autohaus_pin: Button = $MapArea/AutohausPin
 @onready var pit_lane_pin: Button = $MapArea/PitLanePin
 @onready var season_pin: Button = $MapArea/SeasonPin
+@onready var save_button: Button = $HeaderBar/MarginContainer/HBoxContainer/SaveButton
+@onready var save_status_label: Label = $HeaderBar/MarginContainer/HBoxContainer/SaveStatusLabel
+@onready var save_status_timer: Timer = $SaveStatusTimer
 
 
 func _ready() -> void:
@@ -20,7 +23,10 @@ func _ready() -> void:
 	autohaus_pin.pressed.connect(func(): SceneManager.goto_screen("autohaus"))
 	pit_lane_pin.pressed.connect(func(): SceneManager.goto_screen("pit_lane"))
 	season_pin.pressed.connect(func(): SceneManager.goto_screen("season"))
+	save_button.pressed.connect(_on_save_button_pressed)
+	save_status_timer.timeout.connect(func(): save_status_label.text = "")
 	_refresh_header()
+	SaveManager.save_game()  # Autosave beim Betreten des Hubs
 
 
 func _refresh_header() -> void:
@@ -44,3 +50,9 @@ func _car_display_name(car: CarConfig) -> String:
 		return car.model_name
 	var chassis: Dictionary = PartsDatabase.get_part("chassis", car.chassis_id)
 	return chassis.get("name", car.chassis_id)
+
+
+func _on_save_button_pressed() -> void:
+	var success: bool = SaveManager.save_game()
+	save_status_label.text = "Gespeichert ✓" if success else "Speichern fehlgeschlagen"
+	save_status_timer.start()
