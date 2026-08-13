@@ -1,30 +1,30 @@
 [
 	{
 		"id": "G1",
-		"name": "Standard-Sequential",
+		"name": "Steinbrenner RG5",
 		"weight_kg": 45,
 		"reliability": 9,
-		"price": 40000
+		"price": 32000
 	},
 	{
 		"id": "G2",
-		"name": "Sport-Sequential",
+		"name": "Kronberg SG5 Sport",
 		"weight_kg": 42,
 		"reliability": 7,
-		"price": 70000
+		"price": 58000
 	},
 	{
 		"id": "G3",
-		"name": "Race-Sequential",
+		"name": "Ashford SEQ-1 Prototyp",
 		"weight_kg": 40,
 		"reliability": 6,
-		"price": 110000
+		"price": 95000
 	},
 	{
 		"id": "G4",
-		"name": "Verstärktes Standardgetriebe",
-		"weight_kg": 50,
+		"name": "Steinbrenner RG6+ Kundensport",
+		"weight_kg": 48,
 		"reliability": 10,
-		"price": 35000
+		"price": 46000
 	}
 ]

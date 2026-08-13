@@ -84,6 +84,7 @@ Die Entwicklung startet bewusst klein, mit einer einzigen Klasse und einem begre
 - Demo-Regelwerk: **"DTM Demo 2026"**
 - Bauteil-Pool Demo: 5 Motoren, 4 Getriebe, 4 Fahrwerke, 5 Reifen, 3 Bremsanlagen, 4 Aero-Teile
 - 9 live einstellbare Setup-Parameter (Getriebeübersetzung, Federhärte, Dämpfer, Stabilisator, Sturz, Spur, Reifenluftdruck, ECU-Mapping, Ballast)
+- Spielwährung: **Renn-Mark (RM)**. Marken-/Modellnamen sind aus Lizenzgründen fiktiv, Kennzahlen und Preise orientieren sich aber bewusst eng an der echten DTM-Saison 1990 (letzte Saison mit vorgeschriebenen Saugmotoren) – siehe [`docs/GDD.md`](docs/GDD.md) für die realen Vorbilder je Bauteil.
 
 Details, konkrete Werte und das Formelmodell: siehe [`docs/GDD.md`](docs/GDD.md).
 

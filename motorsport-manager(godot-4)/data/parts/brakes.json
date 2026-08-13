@@ -1,23 +1,23 @@
 [
 	{
 		"id": "B1",
-		"name": "Stahl Standard",
+		"name": "Terlingen Serienbremse",
 		"weight_kg": 22,
 		"brake_power": 7.0,
-		"price": 25000
+		"price": 18000
 	},
 	{
 		"id": "B2",
-		"name": "Verbund Sport",
+		"name": "Bergamo Sport",
 		"weight_kg": 16,
 		"brake_power": 8.5,
-		"price": 55000
+		"price": 42000
 	},
 	{
 		"id": "B3",
-		"name": "Carbon-Keramik Race",
-		"weight_kg": 11,
+		"name": "Redwood Racing 6-Kolben",
+		"weight_kg": 12,
 		"brake_power": 10.0,
-		"price": 120000
+		"price": 88000
 	}
 ]

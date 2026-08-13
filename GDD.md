@@ -2,9 +2,9 @@
 
 **Version:** 0.2 (Demo-Scope + Grafik-Konzept)
 **Stand:** August 2026
-**Demo-Klasse:** DTM (Deutsche Tourenwagen Masters) – fiktive Saison "DTM Demo 2026"
+**Demo-Klasse:** DTM (Deutsche Tourenwagen Meisterschaft) – fiktive Saison "DTM Demo 2026"
 
-> Hinweis: Alle Hersteller-/Markennamen sind fiktiv, um spätere Lizenzprobleme zu vermeiden. Reale Vorbilder (Motorenbauart, Kennzahlen, Spielreferenzen für den Grafikstil) dienen nur als Realismus-/Stil-Referenz.
+> Hinweis: Alle Hersteller-/Markennamen sind fiktiv, um spätere Lizenzprobleme zu vermeiden. Kennzahlen, Preise und technische Historie orientieren sich dagegen bewusst eng an der echten DTM-Saison 1990 (letzte Saison mit vorgeschriebenen Saugmotoren): Voss GT30 Sport Evolution ≈ BMW M3 Sport Evolution, Brandt R4 2.5-16 (Evolution/Evolution II) ≈ Mercedes-Benz 190E 2.5-16 (Evolution/Evolution II), Kessler R6 3.0 24V ≈ Opel Omega 3000 24V, Falkner V8 3.6 Allrad ≈ Audi V8 quattro. Preise in "Renn-Mark (RM)" sind zahlenmäßig an reale 1990er-DM-Werte angelehnt (z.B. 85.000 RM Fahrzeugpreis ≈ realer BMW-M3-Sport-Evolution-Neupreis von 85.000 DM), wo keine belastbare Quelle vorlag, sind es plausible Schätzwerte im selben Preisrahmen.
 
 ---
 
@@ -55,65 +55,66 @@ Zwei unterschiedliche, aber stilistisch konsistente Darstellungsarten je nach Sp
 
 ### 4.1 Motoren (5)
 
-| ID | Name | Bauart | PS | Max. Drehmoment (Nm) | Gewicht (kg) | Zuverlässigkeit (1–10) | Preis (€) | Besonderheit |
-|----|------|--------|----|----|----|----|----|----|
-| E1 | Voss V8 4.0 Sauger | Sauger, V8 | 460 | 430 | 185 | 9 | 180.000 | Lineare Leistungsentfaltung, hohe Drehzahlgrenze (8.200 U/min), kein Turboloch |
-| E2 | Brandt I4 2.0 Turbo | Turbo, I4 | 520 | 480 | 145 | 6 | 160.000 | Turboloch bei niedrigen Drehzahlen, günstig, verschleißanfällig |
-| E3 | Kessler V6 3.2 BiTurbo | Bi-Turbo, V6 | 560 | 560 | 168 | 7 | 240.000 | Höchste Leistung, Ladedruck einstellbar, teuer |
-| E4 | Falkner V8 4.2 Kompressor | Kompressor, V8 | 500 | 510 | 205 | 8 | 200.000 | Kein Turboloch, aber +15% Verbrauch (Riemenantrieb dauerhaft aktiv) |
-| E5 | Reiner V10 4.5 Sauger | Sauger, V10 | 480 | 450 | 178 | 8 | 260.000 | Sehr hohe Drehzahlgrenze (9.000 U/min), leicht, teuer |
+Alle fünf sind Saugmotoren – Turbo/Kompressor sind im Regelwerk verboten (siehe Abschnitt 7), analog zum echten DTM-Reglement ab 1990.
 
-**Aufladungs-Logik (für spätere Formel):**
-- *Sauger:* lineare Leistungskurve, kein Lag, geringster Verbrauch
-- *Turbo:* Leistungseinbruch unter ca. 4.000 U/min ("Lag"), dafür höchste Peak-Leistung pro kg
-- *Kompressor:* keine Verzögerung, aber konstanter Leistungsverlust durch mechanischen Antrieb (~Verbrauchsmalus)
+| ID | Name | Bauart | PS | Max. Drehmoment (Nm) | Gewicht (kg) | Zuverlässigkeit (1–10) | Preis (RM) | Reales Vorbild |
+|----|------|--------|----|----|----|----|----|----|
+| E1 | Voss S4 2.5 Sport Evolution | Sauger, R4 | 340 | 260 | 140 | 9 | 118.000 | BMW M3 Sport Evolution (S14B25) |
+| E2 | Brandt R4 2.5-16 Evolution II | Sauger, R4, 16V | 330 | 260 | 138 | 8 | 126.000 | Mercedes-Benz 190E 2.5-16 Evolution II |
+| E3 | Brandt R4 2.5-16 Evolution | Sauger, R4, 16V | 300 | 240 | 136 | 9 | 98.000 | Mercedes-Benz 190E 2.5-16 Evolution |
+| E4 | Kessler R6 3.0 24V | Sauger, R6 | 360 | 338 | 175 | 7 | 132.000 | Opel Omega 3000 24V (Irmscher-Renntechnik) |
+| E5 | Falkner V8 3.6 Allrad | Sauger, V8 | 420 | 390 | 205 | 8 | 168.000 | Audi V8 quattro (Saisonbeginn-Leistung) |
 
 ### 4.2 Getriebe (4)
 
-| ID | Name | Gänge | Schaltzeit (ms) | Gewicht (kg) | Zuverlässigkeit | Preis (€) |
+Reine H-Schaltung mit Kupplungspedal – sequenzielle Schaltgetriebe sind (wie 1990 real) nicht homologiert.
+
+| ID | Name | Gänge | Schaltzeit (ms) | Gewicht (kg) | Zuverlässigkeit | Preis (RM) |
 |----|------|----|----|----|----|----|
-| G1 | Standard-Sequential | 6 | 80 | 45 | 9 | 40.000 |
-| G2 | Sport-Sequential | 6 | 50 | 42 | 7 | 70.000 |
-| G3 | Race-Sequential | 7 | 35 | 40 | 6 | 110.000 |
-| G4 | Verstärktes Standardgetriebe | 6 | 90 | 50 | 10 | 35.000 |
+| G1 | Steinbrenner RG5 | 5 | 80 | 45 | 9 | 32.000 |
+| G2 | Kronberg SG5 Sport | 5 | 50 | 42 | 7 | 58.000 |
+| G3 | Ashford SEQ-1 Prototyp | 6 (sequenziell) | 35 | 40 | 6 | 95.000 |
+| G4 | Steinbrenner RG6+ Kundensport | 6 | 90 | 48 | 10 | 46.000 |
 
 ### 4.3 Fahrwerke – Hardware (4)
 
 Definiert den *Verstellbereich* für die Setup-Parameter (Abschnitt 5), nicht die Einstellung selbst.
 
-| ID | Name | Gewicht (kg) | Preis (€) | Verstellbereich | Besonderheit |
+| ID | Name | Gewicht (kg) | Preis (RM) | Verstellbereich | Besonderheit |
 |----|------|----|----|----|----|
-| C1 | Standard-Fahrwerk | 60 | 50.000 | normal | Robust, verzeihend |
-| C2 | Sport-Fahrwerk | 52 | 90.000 | erweitert | Steiferer Grundsetup |
-| C3 | Renn-Fahrwerk Pro | 45 | 150.000 | maximal | Empfindlich – Fehleinstellung wirkt stärker |
-| C4 | Leichtbau-Fahrwerk | 38 | 130.000 | erweitert | Schnellerer Verschleiß bei Kerbs |
+| C1 | Steiner DT1 | 60 | 42.000 | normal | Robust, verzeihend |
+| C2 | Van Dijk Sport | 52 | 72.000 | erweitert | Steiferer Grundsetup |
+| C3 | Höglund Race | 45 | 128.000 | maximal | Empfindlich – Fehleinstellung wirkt stärker |
+| C4 | Steiner DT1 Clubsport | 38 | 110.000 | erweitert | Schnellerer Verschleiß bei Kerbs |
 
 ### 4.4 Reifen (5)
 
-| ID | Name | Grip trocken | Grip nass | Verschleißfaktor | Optimales Temperaturfenster |
+| ID | Name | Grip trocken | Grip nass | Verschleißfaktor | Preis (RM) |
 |----|------|----|----|----|----|
-| T1 | Hart | 6/10 | 2/10 | 0.6 | breit |
-| T2 | Medium | 7.5/10 | 3/10 | 1.0 | mittel |
-| T3 | Weich | 9/10 | 3/10 | 1.6 | schmal |
-| T4 | Regen | 3/10 | 9/10 | 1.2 | schmal (kalt) |
-| T5 | Intermediate | 5/10 | 7/10 | 1.1 | mittel |
+| T1 | Waldmann Hart | 6/10 | 2/10 | 0.6 | 2.800 |
+| T2 | Clermont Medium | 7.5/10 | 3/10 | 1.0 | 3.200 |
+| T3 | Kanagawa Weich | 9/10 | 3/10 | 1.6 | 3.800 |
+| T4 | Clermont Regen | 3/10 | 9/10 | 1.2 | 2.600 |
+| T5 | Waldmann Intermediate | 5/10 | 7/10 | 1.1 | 3.000 |
 
 ### 4.5 Bremsanlagen (3)
 
-| ID | Name | Bremsleistung | Gewicht (kg) | Preis (€) | Besonderheit |
+| ID | Name | Bremsleistung | Gewicht (kg) | Preis (RM) | Besonderheit |
 |----|------|----|----|----|----|
-| B1 | Stahl Standard | 7/10 | 22 | 25.000 | Unempfindlich gg. Temperatur |
-| B2 | Verbund Sport | 8.5/10 | 16 | 55.000 | Gute Balance |
-| B3 | Carbon-Keramik Race | 10/10 | 11 | 120.000 | Braucht Mindesttemperatur, sonst Leistungseinbruch |
+| B1 | Terlingen Serienbremse | 7/10 | 22 | 18.000 | Unempfindlich gg. Temperatur |
+| B2 | Bergamo Sport | 8.5/10 | 16 | 42.000 | Gute Balance |
+| B3 | Redwood Racing 6-Kolben | 10/10 | 12 | 88.000 | Mehrkolben-Rennsattel, ab Rennen 3 verfügbar |
 
-### 4.6 Aero (4: 3 Heckspoiler + 1 Heckdiffusor)
+### 4.6 Aero (4: 3 Heckflügel-Stellungen + 1 Frontspoiler)
 
-| ID | Name | Abtrieb | Luftwiderstand | Preis (€) |
+Reales Vorbild: der verstellbare Heckflügel des BMW M3 Sport Evolution mit den Stellungen "Monza" (wenig Abtrieb/Widerstand), "Normal" und "Nürburgring" (viel Abtrieb/Widerstand).
+
+| ID | Name | Abtrieb | Luftwiderstand | Preis (RM) |
 |----|------|----|----|----|
-| A1 | Heckspoiler Low | 3/10 | 2/10 | 20.000 |
-| A2 | Heckspoiler Medium | 6/10 | 5/10 | 35.000 |
-| A3 | Heckspoiler High | 9/10 | 8/10 | 55.000 |
-| A4 | Heckdiffusor Standard | +2/10 (additiv) | +1/10 | 40.000 |
+| A1 | Voss Heckflügel "Monza" | 3/10 | 2/10 | 9.000 |
+| A2 | Voss Heckflügel "Normal" | 6/10 | 5/10 | 14.000 |
+| A3 | Voss Heckflügel "Nürburgring" | 9/10 | 8/10 | 22.000 |
+| A4 | Voss Frontspoiler (3-fach verstellbar) | +2/10 (additiv) | +1/10 | 16.000 |
 
 ---
 
@@ -165,11 +166,11 @@ Jeder `_Faktor` ist für die Demo eine einfache lineare Interpolation zwischen M
 
 1. Max. Leistung: **550 PS**
 2. Mindestgewicht: **1.050 kg** (inkl. Fahrer)
-3. Aufladung: Turbo & Kompressor erlaubt, max. Ladedruck **1.4 bar**
+3. Aufladung: **Turbo & Kompressor verboten** – nur Saugmotoren zulässig (analog zur realen DTM-Regeländerung ab 1990)
 4. Reifen: nur homologierte Trockenreifen (Hart/Medium/Weich) pro Rennwochenende, max. **8 Sätze**
-5. Aero: Heckspoiler max. Klasse **"Medium"** – **A3 (High) ist nicht zulässig**
-6. Bremsen: Carbon-Keramik (B3) erst **ab Saisonrennen 3** freigegeben
-7. Getriebe: max. **6 Gänge** – **G3 (7-Gang) ist nicht zulässig**
+5. Aero: Heckflügel max. Stellung **"Normal"** – **A3 ("Nürburgring") ist nicht zulässig**
+6. Bremsen: Redwood Racing 6-Kolben (B3) erst **ab Saisonrennen 3** freigegeben
+7. Getriebe: nur klassische Schaltung mit Kupplungspedal – **G3 (sequenzieller Prototyp) ist nicht zulässig**
 8. Sturz: max. **-3.0°** vorne wie hinten
 9. Ballast: mind. **20 kg**, wenn Fahrzeuggewicht ohne Ballast unter Mindestgewicht liegt
 
@@ -195,14 +196,14 @@ Jedes Bauteil referenziert zusätzlich sein Low-Poly-Mesh und den Socket, an dem
 {
   "id": "E1",
   "category": "engine",
-  "name": "Voss V8 4.0 Sauger",
-  "aspiration": "naturally_aspirated",
-  "power_hp": 460,
-  "torque_nm": 430,
-  "weight_kg": 185,
+  "name": "Voss S4 2.5 Sport Evolution",
+  "aspiration": "natural",
+  "power_hp": 340,
+  "torque_nm": 260,
+  "weight_kg": 140,
   "reliability": 9,
-  "price": 180000,
-  "mesh": "res://assets/models/parts/engines/e1_voss_v8.tres",
+  "price": 118000,
+  "mesh": "res://assets/models/parts/engines/e1_voss_s4.tres",
   "socket": "engine_bay"
 }
 ```
@@ -213,6 +214,7 @@ Jedes Bauteil referenziert zusätzlich sein Low-Poly-Mesh und den Socket, an dem
   "rules": [
     { "type": "max_power", "value": 550 },
     { "type": "min_weight", "value": 1050 },
+    { "type": "banned_aspiration", "values": ["turbo", "kompressor"] },
     { "type": "banned_part", "part_id": "A3" },
     { "type": "banned_part", "part_id": "G3" }
   ]

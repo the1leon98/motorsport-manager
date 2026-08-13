@@ -402,12 +402,33 @@ Verifikationsdurchlauf statt "hoffentlich passt's".
 - **Fahrzeug-Verkauf im Autohaus**, **Rennergebnis-/Punkte-Historie** – als
   "nice to have später" in den jeweiligen Phasen vermerkt, nicht Teil des
   Grundgerüst-Minimalumfangs.
-- **Saisonfortschritt nach Rennende** – beim Phase-J-Ende-zu-Ende-Test
-  aufgefallen (siehe Verifikationsnotiz oben): `current_race_number` wird
-  nach einem abgeschlossenen Rennen aktuell nicht erhöht, die Demo bleibt
-  bei Rennen 1 stehen. Passt zur bewussten Phase-H-Entscheidung
-  "erstmal keine Rennergebnisse speichern", ist aber ein Fast-Follow, sobald
-  eine echte Mehrfach-Rennen-Saison getestet werden soll.
+- ~~**Saisonfortschritt nach Rennende**~~ – **erledigt.** `race_controller.gd`
+  ruft in `_finish_race()` bereits `GameState.advance_race()` auf, und
+  `GameState.advance_race()` erhöht `team.current_race_number` (begrenzt auf
+  die Gesamtzahl der Strecken). Beim Code-Review am 2026-08-12 im Rahmen der
+  Content-Design-Phase (siehe unten) bereits im Code vorgefunden – kein
+  offener Fix mehr nötig.
+
+## Phase A – Nachtrag: reale DTM-1990-Bezüge (2026-08-12)
+
+Die Bauteil-Pools waren zum Zeitpunkt dieses Nachtrags bereits auf den
+Ziel-Umfang 5/4/4/5/3/4 erweitert und alle Preisfelder vorhanden (Reifen
+ausgenommen, siehe unten) – der offene Rest von Phase A war die inhaltliche
+Ausgestaltung. Auf expliziten Wunsch orientieren sich Fahrzeug, Motoren,
+Getriebe, Fahrwerk, Reifen, Bremsen und Aero jetzt eng an der echten
+DTM-Saison 1990 (BMW M3 Sport Evolution, Mercedes-Benz 190E 2.5-16
+Evolution/Evolution II, Opel Omega 3000 24V, Audi V8 quattro; dazu reale
+Zulieferer-Kategorien für Reifen/Bremsen/Fahrwerk/Getriebe). Markennamen
+bleiben aus Lizenzgründen fiktiv (siehe GDD-Hinweis), Kennzahlen und Preise
+(neue Währung **Renn-Mark/RM**) sind so nah wie recherchierbar an den realen
+1990er-Werten. Dabei außerdem gefixt: das Preisfeld fehlte bisher bei allen
+Reifen (jetzt ergänzt), und die Bremsen-Topstufe hieß "Carbon-Keramik" –
+technisch anachronistisch für 1990 (Carbon-Keramik-Bremsen kamen erst ab den
+2000ern auf), jetzt durch eine reale Mehrkolben-Stahlbremsanlage ersetzt. Die
+Regel zum Ladedruck (`max_boost`) ist jetzt um eine neue, historisch
+zutreffendere Regel `banned_aspiration` ergänzt (Turbo/Kompressor generell
+verboten, analog zum echten Reglement-Wechsel 1990) –
+`regulation_validator.gd` wurde entsprechend erweitert.
 
 ---
 

@@ -1,26 +1,26 @@
 [
 	{
 		"id": "C1",
-		"name": "Standard-Fahrwerk",
+		"name": "Steiner DT1",
 		"weight_kg": 60,
-		"price": 50000
+		"price": 42000
 	},
 	{
 		"id": "C2",
-		"name": "Sport-Fahrwerk",
+		"name": "Van Dijk Sport",
 		"weight_kg": 52,
-		"price": 90000
+		"price": 72000
 	},
 	{
 		"id": "C3",
-		"name": "Renn-Fahrwerk Pro",
+		"name": "Höglund Race",
 		"weight_kg": 45,
-		"price": 150000
+		"price": 128000
 	},
 	{
 		"id": "C4",
-		"name": "Leichtbau-Fahrwerk",
+		"name": "Steiner DT1 Clubsport",
 		"weight_kg": 38,
-		"price": 130000
+		"price": 110000
 	}
 ]

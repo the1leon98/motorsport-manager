@@ -38,6 +38,11 @@ static func validate(car: CarConfig, stats: Dictionary, db: Node, regulation_id:
 						violations.append("Ladedruck %.1f bar überschreitet Limit von %.1f bar" % [boost, rule["value_bar"]])
 						violation_rules.append(rule)
 
+			"banned_aspiration":
+				if rule.get("values", []).has(engine.get("aspiration", "")):
+					violations.append("Motor-Aufladung \"%s\" ist nicht zulässig (%s)" % [engine.get("aspiration", ""), rule.get("reason", "")])
+					violation_rules.append(rule)
+
 			"tire_allowance":
 				if not rule["allowed_part_ids"].has(car.tire_id):
 					violations.append("Reifen %s ist für dieses Rennwochenende nicht homologiert" % car.tire_id)

@@ -4,11 +4,11 @@
 	"rules": [
 		{ "type": "max_power", "value_hp": 550 },
 		{ "type": "min_weight", "value_kg": 1050 },
-		{ "type": "max_boost", "value_bar": 1.4, "applies_to_aspiration": ["turbo", "kompressor"] },
+		{ "type": "banned_aspiration", "values": ["turbo", "kompressor"], "reason": "Aufladung durch Turbolader oder Kompressor ist im aktuellen Reglement verboten (Kostenbegrenzung) – nur Saugmotoren sind zulässig" },
 		{ "type": "tire_allowance", "allowed_part_ids": ["T1", "T2", "T3"] },
-		{ "type": "banned_part", "part_id": "G3", "reason": "Nicht homologiertes 7-Gang-Getriebe (max. 6 Gänge erlaubt)" },
-		{ "type": "banned_part", "part_id": "A3", "reason": "Heckspoiler überschreitet die maximal zulässige Abtriebsklasse (Medium)" },
-		{ "type": "part_unlock", "part_id": "B3", "unlocks_from_race": 3, "reason": "Carbon-Keramik-Bremsen erst ab Rennen 3 homologiert" },
+		{ "type": "banned_part", "part_id": "G3", "reason": "Sequenzielles Schaltgetriebe ist nicht homologiert (nur klassische Schaltung mit Kupplungspedal erlaubt)" },
+		{ "type": "banned_part", "part_id": "A3", "reason": "Heckflügel-Stellung überschreitet die maximal zulässige Abtriebsklasse (Medium)" },
+		{ "type": "part_unlock", "part_id": "B3", "unlocks_from_race": 3, "reason": "Renn-Bremsanlage erst ab Rennen 3 im Kundensport verfügbar/homologiert" },
 		{ "type": "max_camber", "value_deg": -3.0 },
 		{ "type": "min_ballast_if_underweight", "value_kg": 20 }
 	]

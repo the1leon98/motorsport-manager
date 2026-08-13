@@ -1,32 +1,37 @@
 [
 	{
 		"id": "T1",
-		"name": "Hart",
+		"name": "Waldmann Hart",
 		"grip_dry": 6.0,
-		"wear_factor": 0.6
+		"wear_factor": 0.6,
+		"price": 2800
 	},
 	{
 		"id": "T2",
-		"name": "Medium",
+		"name": "Clermont Medium",
 		"grip_dry": 7.5,
-		"wear_factor": 1.0
+		"wear_factor": 1.0,
+		"price": 3200
 	},
 	{
 		"id": "T3",
-		"name": "Weich",
+		"name": "Kanagawa Weich",
 		"grip_dry": 9.0,
-		"wear_factor": 1.6
+		"wear_factor": 1.6,
+		"price": 3800
 	},
 	{
 		"id": "T4",
-		"name": "Regen",
+		"name": "Clermont Regen",
 		"grip_dry": 3.0,
-		"wear_factor": 1.2
+		"wear_factor": 1.2,
+		"price": 2600
 	},
 	{
 		"id": "T5",
-		"name": "Intermediate",
+		"name": "Waldmann Intermediate",
 		"grip_dry": 5.0,
-		"wear_factor": 1.1
+		"wear_factor": 1.1,
+		"price": 3000
 	}
 ]

@@ -1,9 +1,9 @@
 [
 	{
-		"id": "CAR_VOSS_GT30",
-		"name": "Voss GT30",
-		"description": "Solides Einsteiger-Tourenwagen-Chassis für die DTM Demo-Klasse. Wird mit Basis-Bauteilen ausgeliefert und in der Werkstatt weiter ausgebaut.",
-		"price": 145000,
+		"id": "CAR_VOSS_GT30_EVO",
+		"name": "Voss GT30 Sport Evolution",
+		"description": "Homologationsvariante des Voss GT30 für die DTM-Demo-Klasse: 600 Stück aufgelegt, größerer Vierzylinder-Saugmotor, verstellbares Aero-Paket. Wird mit Basis-Bauteilen ausgeliefert und in der Werkstatt weiter ausgebaut.",
+		"price": 85000,
 		"starter_parts": {
 			"engine_id": "E1",
 			"gearbox_id": "G1",

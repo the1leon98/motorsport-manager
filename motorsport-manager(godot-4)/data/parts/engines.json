@@ -1,52 +1,52 @@
 [
 	{
 		"id": "E1",
-		"name": "Voss V8 4.0 Sauger",
-		"power_hp": 460,
-		"weight_kg": 185,
+		"name": "Voss S4 2.5 Sport Evolution",
+		"power_hp": 340,
+		"weight_kg": 140,
 		"reliability": 9,
 		"aspiration": "natural",
 		"boost_bar_max": 0.0,
-		"price": 180000
+		"price": 118000
 	},
 	{
 		"id": "E2",
-		"name": "Brandt I4 2.0 Turbo",
-		"power_hp": 520,
-		"weight_kg": 145,
-		"reliability": 6,
-		"aspiration": "turbo",
-		"boost_bar_max": 1.3,
-		"price": 160000
-	},
-	{
-		"id": "E3",
-		"name": "Kessler V6 3.2 BiTurbo",
-		"power_hp": 560,
-		"weight_kg": 168,
-		"reliability": 7,
-		"aspiration": "turbo",
-		"boost_bar_max": 1.6,
-		"price": 240000
-	},
-	{
-		"id": "E4",
-		"name": "Falkner V8 4.2 Kompressor",
-		"power_hp": 500,
-		"weight_kg": 205,
-		"reliability": 8,
-		"aspiration": "kompressor",
-		"boost_bar_max": 1.0,
-		"price": 200000
-	},
-	{
-		"id": "E5",
-		"name": "Reiner V10 4.5 Sauger",
-		"power_hp": 480,
-		"weight_kg": 178,
+		"name": "Brandt R4 2.5-16 Evolution II",
+		"power_hp": 330,
+		"weight_kg": 138,
 		"reliability": 8,
 		"aspiration": "natural",
 		"boost_bar_max": 0.0,
-		"price": 260000
+		"price": 126000
+	},
+	{
+		"id": "E3",
+		"name": "Brandt R4 2.5-16 Evolution",
+		"power_hp": 300,
+		"weight_kg": 136,
+		"reliability": 9,
+		"aspiration": "natural",
+		"boost_bar_max": 0.0,
+		"price": 98000
+	},
+	{
+		"id": "E4",
+		"name": "Kessler R6 3.0 24V",
+		"power_hp": 360,
+		"weight_kg": 175,
+		"reliability": 7,
+		"aspiration": "natural",
+		"boost_bar_max": 0.0,
+		"price": 132000
+	},
+	{
+		"id": "E5",
+		"name": "Falkner V8 3.6 Allrad",
+		"power_hp": 420,
+		"weight_kg": 205,
+		"reliability": 8,
+		"aspiration": "natural",
+		"boost_bar_max": 0.0,
+		"price": 168000
 	}
 ]

@@ -11,13 +11,13 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	var car := CarConfig.new()
-	car.engine_id = "E1"       # Voss V8 4.0 Sauger
-	car.gearbox_id = "G1"      # Standard-Sequential
-	car.chassis_id = "C2"      # Sport-Fahrwerk
-	car.tire_id = "T2"         # Medium
-	car.brake_id = "B2"        # Verbund Sport
-	car.rear_wing_id = "A2"    # Heckspoiler Medium
-	car.diffuser_id = "A4"     # Heckdiffusor Standard
+	car.engine_id = "E1"       # Voss S4 2.5 Sport Evolution
+	car.gearbox_id = "G1"      # Steinbrenner RG5
+	car.chassis_id = "C2"      # Van Dijk Sport
+	car.tire_id = "T2"         # Clermont Medium
+	car.brake_id = "B2"        # Bergamo Sport
+	car.rear_wing_id = "A2"    # Voss Heckflügel "Normal"
+	car.diffuser_id = "A4"     # Voss Frontspoiler
 	car.gear_ratio = 4.0
 	car.camber_deg = -2.5
 	car.tire_pressure_bar = 2.0
