@@ -211,18 +211,6 @@ func _build_stats_panel() -> void:
 
 
 func _refresh() -> void:
-	var stats: Dictionary = StatsCalculator.calculate(car, PartsDatabase)
-	stats_label.text = "PS: %.0f    Gewicht: %.0f kg    Topspeed: %.0f km/h\n0-100: %.2f s    Kurvengrip: %.1f    Bremsweg: %.0f m\nReifenverschleiß: %.2f    Ausfallrisiko: %.1f%%" % [
-		stats["power_hp"], stats["weight_kg"], stats["topspeed_kmh"],
-		stats["accel_0_100_s"], stats["corner_grip_index"], stats["braking_distance_m"],
-		stats["tire_wear_rate"], stats["failure_risk_pct"],
-	]
-
-	var result: Dictionary = RegulationValidator.validate(car, stats, PartsDatabase, GameState.REGULATION_ID, GameState.team.current_race_number)
-	if result["compliant"]:
-		compliance_label.text = "✓ Regelkonform"
-	else:
-		var lines: Array = ["✗ Nicht regelkonform:"]
-		for v in result["violations"]:
-			lines.append(" - %s" % v)
-		compliance_label.text = "\n".join(lines)
+	var vm: Dictionary = GarageViewModel.build(car)
+	stats_label.text = vm["stats_text"]
+	compliance_label.text = vm["compliance_text"]

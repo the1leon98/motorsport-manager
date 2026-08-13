@@ -3,6 +3,25 @@ class_name RegulationValidator
 # Prüft eine CarConfig gegen ein Regelwerk aus data/regulations/*.json.
 # Reine Utility-Klasse: RegulationValidator.validate(car, stats, PartsDatabase, "dtm_demo_2026")
 
+# Schweregrad je Regel-Typ (siehe GDD Abschnitt 8, Bestechungskosten-Formel).
+# Einziger Ort, der weiß, wie schwer ein Verstoß-Typ wiegt – Aufrufer wie
+# pit_lane_controller.gd lesen severity_for() statt eine eigene Tabelle zu
+# pflegen, die mit dieser hier synchron gehalten werden müsste.
+const SEVERITY_BY_RULE_TYPE := {
+	"max_power": 2,
+	"min_weight": 2,
+	"max_boost": 2,
+	"tire_allowance": 1,
+	"banned_part": 3,
+	"part_unlock": 3,
+	"max_camber": 1,
+	"min_ballast_if_underweight": 1,
+}
+
+
+static func severity_for(rule: Dictionary) -> int:
+	return SEVERITY_BY_RULE_TYPE.get(rule["type"], 1)
+
 
 static func validate(car: CarConfig, stats: Dictionary, db: Node, regulation_id: String, current_race_number: int = 1) -> Dictionary:
 	var regulation: Dictionary = db.get_regulation(regulation_id)

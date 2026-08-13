@@ -27,7 +27,7 @@ func _ready() -> void:
 	else:
 		car_name_label.text = car_data["name"]
 		description_label.text = car_data["description"]
-		price_label.text = "Preis: %s" % GameState.format_money(car_data["price"])
+		price_label.text = "Preis: %s" % MoneyFormat.format(car_data["price"])
 
 	_refresh()
 
@@ -41,6 +41,6 @@ func _on_buy_pressed() -> void:
 
 
 func _refresh() -> void:
-	budget_label.text = "Budget: %s" % GameState.format_money(GameState.team.budget)
+	budget_label.text = "Budget: %s" % MoneyFormat.format(GameState.team.budget)
 	if not car_data.is_empty():
 		buy_button.disabled = float(car_data["price"]) > GameState.team.budget

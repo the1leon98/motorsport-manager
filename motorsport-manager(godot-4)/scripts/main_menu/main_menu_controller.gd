@@ -81,7 +81,7 @@ func _slot_description(slot: int, info: Dictionary) -> String:
 		return "Slot %d: leer" % (slot + 1)
 	var mode_text: String = "Karriere" if info["game_mode"] == "career" else "Schnelles Spiel"
 	return "Slot %d: %s · Rennen %d · %s" % [
-		slot + 1, mode_text, info["current_race_number"], GameState.format_money(info["budget"]),
+		slot + 1, mode_text, info["current_race_number"], MoneyFormat.format(info["budget"]),
 	]
 
 

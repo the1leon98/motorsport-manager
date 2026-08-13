@@ -77,17 +77,3 @@ func get_current_track() -> Dictionary:
 func advance_race() -> void:
 	var total_tracks: int = PartsDatabase.get_all_tracks().size()
 	team.current_race_number = min(team.current_race_number + 1, total_tracks)
-
-
-static func format_money(amount: float) -> String:
-	var rounded: int = int(round(amount))
-	var negative: bool = rounded < 0
-	var digits: String = str(abs(rounded))
-	var grouped: String = ""
-	var count: int = 0
-	for i in range(digits.length() - 1, -1, -1):
-		grouped = digits[i] + grouped
-		count += 1
-		if count % 3 == 0 and i != 0:
-			grouped = "." + grouped
-	return ("-" if negative else "") + grouped

@@ -15,17 +15,6 @@ const MIN_CAUGHT_RISK := 0.10   # fixe 10% Basis-Restrisiko laut GDD Abschnitt 8
 const MAX_CAUGHT_RISK := 0.50
 const REPUTATION_LOSS_ON_CAUGHT := 15.0
 
-const SEVERITY_BY_RULE_TYPE := {
-	"max_power": 2,
-	"min_weight": 2,
-	"max_boost": 2,
-	"tire_allowance": 1,
-	"banned_part": 3,
-	"part_unlock": 3,
-	"max_camber": 1,
-	"min_ballast_if_underweight": 1,
-}
-
 @onready var no_car_panel: CenterContainer = $NoCarPanel
 @onready var no_car_back_button: Button = $NoCarPanel/VBoxContainer/BackButton
 
@@ -66,8 +55,7 @@ func _ready() -> void:
 
 func _check_car() -> void:
 	var car: CarConfig = GameState.get_selected_car()
-	var stats: Dictionary = StatsCalculator.calculate(car, PartsDatabase)
-	current_result = RegulationValidator.validate(car, stats, PartsDatabase, GameState.REGULATION_ID, GameState.team.current_race_number)
+	current_result = CarEvaluation.evaluate(car)["compliance"]
 
 	var track: Dictionary = GameState.get_current_track()
 	track_label.text = "Rennen %d: %s" % [GameState.team.current_race_number, track.get("name", "-")]
@@ -89,12 +77,12 @@ func _check_car() -> void:
 		bribe_cost = costs["bribe_cost"]
 		caught_penalty = costs["caught_penalty"]
 
-		bribe_button.text = "Bestechen (%s)" % GameState.format_money(bribe_cost)
+		bribe_button.text = "Bestechen (%s)" % MoneyFormat.format(bribe_cost)
 		bribe_button.visible = true
 		bribe_button.disabled = bribe_cost > GameState.team.budget
 
 		risk_label.text = "Risiko aufzufliegen: %d%% (Ruf aktuell %d/100) – bei Auffliegen zusätzlich %s Strafe + Ruf-Verlust" % [
-			int(round(current_risk * 100.0)), int(round(GameState.team.reputation)), GameState.format_money(caught_penalty),
+			int(round(current_risk * 100.0)), int(round(GameState.team.reputation)), MoneyFormat.format(caught_penalty),
 		]
 		risk_label.visible = true
 
@@ -112,7 +100,7 @@ func _effective_caught_risk() -> float:
 func _calculate_bribe_costs(violation_rules: Array, risk: float) -> Dictionary:
 	var base_total: float = 0.0
 	for rule in violation_rules:
-		var severity: int = SEVERITY_BY_RULE_TYPE.get(rule["type"], 1)
+		var severity: int = RegulationValidator.severity_for(rule)
 		base_total += BASE_BRIBE_COST * severity
 	return {"bribe_cost": base_total * (1.0 + risk), "caught_penalty": base_total}
 
@@ -123,7 +111,7 @@ func _on_bribe_pressed() -> void:
 		return
 
 	bribe_confirm_dialog.dialog_text = "Bestechung für %s zahlen?\nRisiko aufzufliegen: %d%%. Bei Auffliegen zusätzlich %s Strafe + Ruf-Verlust." % [
-		GameState.format_money(bribe_cost), int(round(current_risk * 100.0)), GameState.format_money(caught_penalty),
+		MoneyFormat.format(bribe_cost), int(round(current_risk * 100.0)), MoneyFormat.format(caught_penalty),
 	]
 	bribe_confirm_dialog.popup_centered()
 
@@ -135,7 +123,7 @@ func _on_bribe_confirmed() -> void:
 		GameState.team.budget -= caught_penalty
 		GameState.team.reputation = max(0.0, GameState.team.reputation - REPUTATION_LOSS_ON_CAUGHT)
 		status_label.text = "Bestechung erfolgreich, aber aufgeflogen! Zusatzstrafe: %s. Ruf sinkt auf %d/100. Startfreigabe trotzdem erteilt." % [
-			GameState.format_money(caught_penalty), int(round(GameState.team.reputation)),
+			MoneyFormat.format(caught_penalty), int(round(GameState.team.reputation)),
 		]
 	else:
 		status_label.text = "Bestechung erfolgreich und unbemerkt. Startfreigabe erteilt."
